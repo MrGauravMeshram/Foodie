@@ -1,8 +1,9 @@
 import { View, Text, Image, StatusBar } from 'react-native';
-import { Styles } from './Style.ts'
+import { Styles } from '../../../Styles/AuthStyle'
 import React, { useState } from 'react';
 import InputField from '../../../Components/InputField';
 import { Button } from '../../../Components/Button';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 const SignUp = ({ navigation }: any) => {
     const [fullName, setFullName] = useState("");
@@ -50,12 +51,22 @@ const SignUp = ({ navigation }: any) => {
     ];
 
     return (
+       <KeyboardAwareScrollView
+  enableOnAndroid={true}
+  extraScrollHeight={100}
+  keyboardShouldPersistTaps="handled"
+  showsVerticalScrollIndicator={false}
+  contentContainerStyle={{
+    flexGrow: 1,
+    paddingBottom: 30,
+  }}
+>
         <View style={Styles.container}>
             <StatusBar
                 barStyle={"light-content"}
             />
             <Image
-                source={require('../../../Assets/Png/Ellipse.png')}
+                source={require('../../../Assets/Images/Ellipse.png')}
                 style={Styles.ellipse}
             />
             <View style={Styles.upperSec}>
@@ -84,6 +95,7 @@ const SignUp = ({ navigation }: any) => {
                 </View>
             </View>
         </View>
+        </KeyboardAwareScrollView>
     );
 }
 

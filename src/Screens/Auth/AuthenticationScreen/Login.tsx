@@ -1,5 +1,5 @@
 import { View, Text, Image, StatusBar } from 'react-native'
-import { Styles } from './Style';
+import { Styles } from '../../../Styles/AuthStyle'
 import React, { useState } from 'react'
 import CheckBox from '@react-native-community/checkbox';
 import InputField from '../../../Components/InputField'
@@ -21,7 +21,7 @@ const Login = ({ navigation }: any) => {
             <StatusBar
                 barStyle={"light-content"}
             />
-            <Image source={require('../../../Assets/Png/Ellipse.png')} style={Styles.ellipse} />
+            <Image source={require('../../../Assets/Images/Ellipse.png')} style={Styles.ellipse} />
             <View style={Styles.upperSec}>
                 <Text style={Styles.title}>Log In</Text>
                 <Text style={Styles.subtitle}>Pleased Sign in to your existing account</Text>
@@ -62,7 +62,7 @@ const Login = ({ navigation }: any) => {
                     </View>
                 </View>
                 <View style={{ marginTop: 30 }}>
-                    <Button title="Log In" onPress={() => { }} />
+                    <Button title="Log In" onPress={() => {navigation.navigate("LocationPremission")}} />
                 </View>
                 <View style={Styles.bottomSec}>
                     <Text style={Styles.bottomtitle}>Don't have an account?</Text>

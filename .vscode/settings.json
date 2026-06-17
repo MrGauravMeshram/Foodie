@@ -8,7 +8,7 @@
   "editor.suggestOnTriggerCharacters": true,
   "editor.acceptSuggestionOnEnter": "on",
   "editor.tabCompletion": "on",
-  "editor.wordBasedSuggestions": true,
+  "editor.wordBasedSuggestions": "matchingDocuments",
   "editor.parameterHints.enabled": true,
   "editor.inlineSuggest.enabled": true,
   "editor.snippetSuggestions": "inline",

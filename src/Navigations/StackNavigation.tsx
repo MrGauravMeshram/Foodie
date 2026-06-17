@@ -4,12 +4,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { View, Text, TouchableOpacity } from 'react-native';
 import SplashScree from '../Screens/SplashScreen/SplashScree';
 import OnBoarding from '../Screens/Auth/OnBoardingScreen/OnBoarding';
-import Login from '../Screens/Auth/AuthenticationScreen.tsx/Login';
+import Login from '../Screens/Auth/AuthenticationScreen/Login';
 import LeftArrow from '../Components/LeftArrow';
-import SignUp from '../Screens/Auth/AuthenticationScreen.tsx/SignUp'
-import VerificationScreen from '../Screens/Auth/AuthenticationScreen.tsx/VerificationScreen';
-import ForgotPassword from '../Screens/Auth/AuthenticationScreen.tsx/ForgotPassword';
-
+import SignUp from '../Screens/Auth/AuthenticationScreen/SignUp'
+import VerificationScreen from '../Screens/Auth/AuthenticationScreen/VerificationScreen';
+import ForgotPassword from '../Screens/Auth/AuthenticationScreen/ForgotPassword';
+import LocationPremission from "../Screens/Auth/LocationPremission/LocationPremission";
 
 
 import React from 'react'
@@ -20,7 +20,7 @@ const Stack = createStackNavigator();
 const StackNavigation = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="SplashScreen">
+            <Stack.Navigator initialRouteName="SplashScreen" >
                 <Stack.Screen name="SplashScreen" component={SplashScree} options={{ headerShown: false }} />
                 <Stack.Screen name="OnBoarding" component={OnBoarding} options={{ headerShown: false }} />
                 <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
@@ -60,6 +60,7 @@ const StackNavigation = () => {
                         </TouchableOpacity>
                     ),
                 })} />
+                <Stack.Screen name="LocationPremission" component={LocationPremission} options={{headerShown:false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -12,9 +12,9 @@ const SplashScree = ({ navigation }: any) => {
     return (
         <View style={styles.container}>
             <StatusBar barStyle="dark-content" />
-            <Image source={require('../../Assets/Png/EllipseTop.png')} style={styles.EllipseTop} resizeMode='contain' />
-            <Image source={require('../../Assets/Png/Logo.png')} style={styles.logo} resizeMode='contain' />
-            <Image source={require('../../Assets/Png/EllipseBottom.png')} style={styles.EllipseBottom} resizeMode='cover' />
+            <Image source={require('../../Assets/Images/EllipseTop.png')} style={styles.EllipseTop} resizeMode='contain' />
+            <Image source={require('../../Assets/Images/Logo.png')} style={styles.logo} resizeMode='contain' />
+            <Image source={require('../../Assets/Images/EllipseBottom.png')} style={styles.EllipseBottom} resizeMode='cover' />
 
         </View>
     )

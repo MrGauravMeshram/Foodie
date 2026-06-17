@@ -2,7 +2,7 @@ import { View, Text, TextInput, StatusBar, Image, StyleSheet } from 'react-nativ
 import React, { useState, useRef } from 'react'
 import { Button } from '../../../Components/Button'
 import { Colors } from '../../../Theme/Color'
-import { Styles } from './Style'
+import { Styles } from '../../../Styles/AuthStyle'
 
 const VerificationScreen = () => {
     const [code, setCode] = useState(['', '', '', '']);
@@ -28,7 +28,7 @@ const VerificationScreen = () => {
     return (
         <View style={Styles.container}>
             <StatusBar barStyle="light-content" />
-            <Image source={require('../../../Assets/Png/Ellipse.png')} style={Styles.ellipse} />
+            <Image source={require('../../../Assets/Images/Ellipse.png')} style={Styles.ellipse} />
 
             <View style={Styles.upperSec}>
                 <Text style={Styles.title}>Verification</Text>
@@ -48,7 +48,7 @@ const VerificationScreen = () => {
                     {code.map((value, index) => (
                         <TextInput
                             key={index}
-                            ref={el => (inputs.current[index] = el)}
+                            ref={el => { inputs.current[index] = el; }}
                             style={styles.otpInput}
                             keyboardType="number-pad"
                             maxLength={1}

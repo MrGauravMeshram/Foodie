@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: Colors.InputBox,
         height: 62,
+        justifyContent:"center",
         borderRadius: 10,
         paddingHorizontal: 20,
     },
