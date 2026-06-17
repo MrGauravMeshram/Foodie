@@ -1,7 +1,6 @@
-import { View, Text, Image, StatusBar } from 'react-native'
+import { View, Text, Image, StatusBar, TouchableOpacity } from 'react-native'
 import { Styles } from '../../../Styles/AuthStyle'
 import React, { useState } from 'react'
-import CheckBox from '@react-native-community/checkbox';
 import InputField from '../../../Components/InputField'
 import { Colors } from '../../../Theme/Color';
 import { Button } from '../../../Components/Button'
@@ -46,15 +45,24 @@ const Login = ({ navigation }: any) => {
                 />
                 <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
                     <View style={Styles.checkboxContainer}>
-                        <CheckBox
-                            value={checked}
-                            onValueChange={setChecked}
-                            tintColors={{ true: Colors.btnColor, false: Colors.lightGrey }}
-                            tintColor={Colors.lightGrey}
-                            onTintColor={Colors.btnColor}
-                            onCheckColor={Colors.white}
-                            onFillColor={Colors.btnColor}
-                        />
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => setChecked(!checked)}
+                            style={{
+                                width: 18,
+                                height: 18,
+                                borderRadius: 4,
+                                borderWidth: 1,
+                                borderColor: checked ? Colors.btnColor : Colors.lightGrey,
+                                backgroundColor: checked ? Colors.btnColor : 'transparent',
+                                justifyContent: 'center',
+                                alignItems: 'center',
+                            }}
+                        >
+                            {checked ? (
+                                <Text style={{ color: Colors.white, fontSize: 12, fontWeight: '700' }}>✓</Text>
+                            ) : null}
+                        </TouchableOpacity>
                         <Text style={Styles.checkboxLabel}>Remember me</Text>
                     </View>
                     <View>
