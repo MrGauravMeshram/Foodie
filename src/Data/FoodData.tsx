@@ -1,145 +1,477 @@
 export const FoodData = {
-    Burger: [
+    All: [
         {
-            id: '1',
+            id: 'all_1',
             name: 'Burger Bistro',
             restaurant: 'Rose Garden',
             price: 40,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/1200x/87/74/80/8774802003656a0f77f037304a98d249.jpg',
+            image: 'https://i.pinimg.com/1200x/87/74/80/8774802003656a0f77f037304a98d249.jpg',
         },
         {
-            id: '2',
+            id: 'all_2',
+            name: 'Margherita Pizza',
+            restaurant: 'Pizza Hut',
+            price: 120,
+            type: 'veg',
+            image: 'https://i.pinimg.com/736x/d1/c8/c6/d1c8c601db379836f1ec5b49258e4e40.jpg',
+        },
+        {
+            id: 'all_3',
+            name: 'Chicken Biryani',
+            restaurant: 'Paradise',
+            price: 220,
+            type: 'nonveg',
+            image: 'https://i.pinimg.com/736x/dc/77/0e/dc770e785e377f6fe31869a9cfa72735.jpg',
+        },
+        {
+            id: 'all_4',
+            name: 'Classic Hot Dog',
+            restaurant: 'Street Bites',
+            price: 45,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?4',
+        },
+        {
+            id: 'all_5',
+            name: 'Club Sandwich',
+            restaurant: 'The Green Club',
+            price: 65,
+            type: 'veg',
+            image: 'https://picsum.photos/200?5',
+        },
+    ],
+
+    Burger: [
+        {
+            id: 'b1',
+            name: 'Burger Bistro',
+            restaurant: 'Rose Garden',
+            price: 40,
+            type: 'nonveg',
+            image: 'https://i.pinimg.com/1200x/87/74/80/8774802003656a0f77f037304a98d249.jpg',
+        },
+        {
+            id: 'b2',
             name: "Smokin' Burger",
             restaurant: 'Cafe Rio',
             price: 60,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/25/17/98/2517984ee7203b9bdda04cd4a78525fd.jpg',
+            image: 'https://i.pinimg.com/736x/25/17/98/2517984ee7203b9bdda04cd4a78525fd.jpg',
         },
         {
-            id: '3',
+            id: 'b3',
             name: 'Buffalo Burger',
             restaurant: 'Kaji Firm Kitchen',
             price: 75,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/42/93/f7/4293f732af488539997fad48c34af0c8.jpg',
+            image: 'https://i.pinimg.com/736x/42/93/f7/4293f732af488539997fad48c34af0c8.jpg',
         },
         {
-            id: '4',
+            id: 'b4',
             name: 'Bullseye Burger',
             restaurant: 'Kabab Restaurant',
             price: 94,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/83/fd/f3/83fdf3191361bd07fcc3cf331695fc9f.jpg',
+            image: 'https://i.pinimg.com/736x/83/fd/f3/83fdf3191361bd07fcc3cf331695fc9f.jpg',
         },
         {
-            id: '5',
+            id: 'b5',
             name: 'Veg Burger',
             restaurant: 'Green Bowl',
             price: 55,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/736x/aa/f3/aa/aaf3aa4e15769c860aff8b2a22edfc78.jpg',
+            image: 'https://i.pinimg.com/736x/aa/f3/aa/aaf3aa4e15769c860aff8b2a22edfc78.jpg',
         },
     ],
 
     Pizza: [
         {
-            id: '1',
+            id: 'p1',
             name: 'Margherita Pizza',
             restaurant: 'Pizza Hut',
             price: 120,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/736x/d1/c8/c6/d1c8c601db379836f1ec5b49258e4e40.jpg',
+            image: 'https://i.pinimg.com/736x/d1/c8/c6/d1c8c601db379836f1ec5b49258e4e40.jpg',
         },
         {
-            id: '2',
+            id: 'p2',
             name: 'Farmhouse Pizza',
             restaurant: 'Dominos',
             price: 180,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/736x/62/5a/f6/625af6256828c8e4b9e36d4c4938a120.jpg',
+            image: 'https://i.pinimg.com/736x/62/5a/f6/625af6256828c8e4b9e36d4c4938a120.jpg',
         },
         {
-            id: '3',
+            id: 'p3',
             name: 'Chicken Pizza',
             restaurant: 'La Pinoz',
             price: 220,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/db/df/c2/dbdfc20407249527be5861b505540276.jpg',
+            image: 'https://i.pinimg.com/736x/db/df/c2/dbdfc20407249527be5861b505540276.jpg',
         },
         {
-            id: '4',
+            id: 'p4',
             name: 'Pepperoni Pizza',
             restaurant: 'Pizza Point',
             price: 250,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/0d/4b/9a/0d4b9a2e16bcb258ca53aa1dbfeb7de0.jpg',
+            image: 'https://i.pinimg.com/736x/0d/4b/9a/0d4b9a2e16bcb258ca53aa1dbfeb7de0.jpg',
         },
         {
-            id: '5',
+            id: 'p5',
             name: 'Paneer Pizza',
             restaurant: 'Italian Oven',
             price: 200,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/1200x/d6/c9/1d/d6c91d4f1dd63c1eb23d98b8736c31ed.jpg',
+            image: 'https://i.pinimg.com/1200x/d6/c9/1d/d6c91d4f1dd63c1eb23d98b8736c31ed.jpg',
+        },
+    ],
+
+    'Hot Dog': [
+        {
+            id: 'hd1',
+            name: 'Classic Hot Dog',
+            restaurant: 'Street Bites',
+            price: 45,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?hd1',
+        },
+        {
+            id: 'hd2',
+            name: 'Cheese Hot Dog',
+            restaurant: 'Cheese Factory',
+            price: 60,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?hd2',
+        },
+    ],
+
+    Sandwich: [
+        {
+            id: 's1',
+            name: 'Club Sandwich',
+            restaurant: 'The Green Club',
+            price: 65,
+            type: 'veg',
+            image: 'https://picsum.photos/200?s1',
+        },
+        {
+            id: 's2',
+            name: 'Grilled Cheese Sandwich',
+            restaurant: 'Toasties',
+            price: 50,
+            type: 'veg',
+            image: 'https://picsum.photos/200?s2',
         },
     ],
 
     Biryani: [
         {
-            id: '1',
+            id: 'by1',
             name: 'Chicken Biryani',
             restaurant: 'Paradise',
             price: 220,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/dc/77/0e/dc770e785e377f6fe31869a9cfa72735.jpg',
+            image: 'https://i.pinimg.com/736x/dc/77/0e/dc770e785e377f6fe31869a9cfa72735.jpg',
         },
         {
-            id: '2',
+            id: 'by2',
             name: 'Mutton Biryani',
             restaurant: 'Bawarchi',
             price: 280,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/b2/ca/33/b2ca3393908473560883bf77ebb7c082.jpg',
+            image: 'https://i.pinimg.com/736x/b2/ca/33/b2ca3393908473560883bf77ebb7c082.jpg',
         },
         {
-            id: '3',
+            id: 'by3',
             name: 'Veg Biryani',
             restaurant: 'Mehfil',
             price: 180,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/736x/c2/9c/13/c29c134ad322f85ec6bdb7fe6bcc3a57.jpg',
+            image: 'https://i.pinimg.com/736x/c2/9c/13/c29c134ad322f85ec6bdb7fe6bcc3a57.jpg',
         },
         {
-            id: '4',
+            id: 'by4',
             name: 'Paneer Biryani',
             restaurant: 'Shah Ghouse',
             price: 190,
             type: 'veg',
-            image:
-                'https://i.pinimg.com/736x/c2/9c/13/c29c134ad322f85ec6bdb7fe6bcc3a57.jpg',
+            image: 'https://i.pinimg.com/736x/c2/9c/13/c29c134ad322f85ec6bdb7fe6bcc3a57.jpg',
         },
         {
-            id: '5',
+            id: 'by5',
             name: 'Special Biryani',
             restaurant: 'Pista House',
             price: 320,
             type: 'nonveg',
-            image:
-                'https://i.pinimg.com/736x/b2/ca/33/b2ca3393908473560883bf77ebb7c082.jpg',
+            image: 'https://i.pinimg.com/736x/b2/ca/33/b2ca3393908473560883bf77ebb7c082.jpg',
+        },
+    ],
+
+    Pasta: [
+        {
+            id: 'pst1',
+            name: 'Red Sauce Pasta',
+            restaurant: 'Italian Delight',
+            price: 110,
+            type: 'veg',
+            image: 'https://picsum.photos/200?pst1',
+        },
+        {
+            id: 'pst2',
+            name: 'White Sauce Pasta',
+            restaurant: 'The Pasta Shop',
+            price: 130,
+            type: 'veg',
+            image: 'https://picsum.photos/200?pst2',
+        },
+    ],
+
+    Noodles: [
+        {
+            id: 'nd1',
+            name: 'Hakka Noodles',
+            restaurant: 'Wok Works',
+            price: 90,
+            type: 'veg',
+            image: 'https://picsum.photos/200?nd1',
+        },
+        {
+            id: 'nd2',
+            name: 'Schezwan Noodles',
+            restaurant: 'Chinatown',
+            price: 100,
+            type: 'veg',
+            image: 'https://picsum.photos/200?nd2',
+        },
+    ],
+
+    Chicken: [
+        {
+            id: 'ch1',
+            name: 'Butter Chicken',
+            restaurant: 'Delhi Darbar',
+            price: 240,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?ch1',
+        },
+        {
+            id: 'ch2',
+            name: 'Fried Chicken',
+            restaurant: 'RFC',
+            price: 160,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?ch2',
+        },
+    ],
+
+    Momos: [
+        {
+            id: 'm1',
+            name: 'Steamed Momos',
+            restaurant: 'Tibet Kitchen',
+            price: 70,
+            type: 'veg',
+            image: 'https://picsum.photos/200?m1',
+        },
+        {
+            id: 'm2',
+            name: 'Fried Momos',
+            restaurant: 'Momo Hub',
+            price: 80,
+            type: 'veg',
+            image: 'https://picsum.photos/200?m2',
+        },
+    ],
+
+    'Ice Cream': [
+        {
+            id: 'ic1',
+            name: 'Choco Fudge',
+            restaurant: 'Cream Stone',
+            price: 85,
+            type: 'veg',
+            image: 'https://picsum.photos/200?ic1',
+        },
+        {
+            id: 'ic2',
+            name: 'Vanilla Scoop',
+            restaurant: 'Baskin Robbins',
+            price: 50,
+            type: 'veg',
+            image: 'https://picsum.photos/200?ic2',
+        },
+    ],
+
+    Cake: [
+        {
+            id: 'ck1',
+            name: 'Black Forest Cake',
+            restaurant: 'Bakehouse',
+            price: 350,
+            type: 'veg',
+            image: 'https://picsum.photos/200?ck1',
+        },
+        {
+            id: 'ck2',
+            name: 'Red Velvet Cake',
+            restaurant: 'Cake Walk',
+            price: 450,
+            type: 'veg',
+            image: 'https://picsum.photos/200?ck2',
+        },
+    ],
+
+    Coffee: [
+        {
+            id: 'cf1',
+            name: 'Cappuccino',
+            restaurant: 'Starbucks',
+            price: 150,
+            type: 'veg',
+            image: 'https://picsum.photos/200?cf1',
+        },
+        {
+            id: 'cf2',
+            name: 'Cold Coffee',
+            restaurant: 'Cafe Coffee Day',
+            price: 120,
+            type: 'veg',
+            image: 'https://picsum.photos/200?cf2',
+        },
+    ],
+
+    Tea: [
+        {
+            id: 't1',
+            name: 'Masala Chai',
+            restaurant: 'Chai Point',
+            price: 30,
+            type: 'veg',
+            image: 'https://picsum.photos/200?t1',
+        },
+        {
+            id: 't2',
+            name: 'Green Tea',
+            restaurant: 'Organic Cafe',
+            price: 45,
+            type: 'veg',
+            image: 'https://picsum.photos/200?t2',
+        },
+    ],
+
+    Juice: [
+        {
+            id: 'j1',
+            name: 'Fresh Orange Juice',
+            restaurant: 'Juice Corner',
+            price: 60,
+            type: 'veg',
+            image: 'https://picsum.photos/200?j1',
+        },
+        {
+            id: 'j2',
+            name: 'Watermelon Juice',
+            restaurant: 'Pulse',
+            price: 50,
+            type: 'veg',
+            image: 'https://picsum.photos/200?j2',
+        },
+    ],
+
+    Salad: [
+        {
+            id: 'sl1',
+            name: 'Caesar Salad',
+            restaurant: 'Green Salad Co',
+            price: 110,
+            type: 'veg',
+            image: 'https://picsum.photos/200?sl1',
+        },
+        {
+            id: 'sl2',
+            name: 'Greek Salad',
+            restaurant: 'Healthy Bites',
+            price: 120,
+            type: 'veg',
+            image: 'https://picsum.photos/200?sl2',
+        },
+    ],
+
+    Wrap: [
+        {
+            id: 'w1',
+            name: 'Paneer Wrap',
+            restaurant: 'Rolls King',
+            price: 90,
+            type: 'veg',
+            image: 'https://picsum.photos/200?w1',
+        },
+        {
+            id: 'w2',
+            name: 'Chicken Wrap',
+            restaurant: 'Faasos',
+            price: 110,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?w2',
+        },
+    ],
+
+    Taco: [
+        {
+            id: 'tc1',
+            name: 'Veg Taco',
+            restaurant: 'Taco Bell',
+            price: 80,
+            type: 'veg',
+            image: 'https://picsum.photos/200?tc1',
+        },
+        {
+            id: 'tc2',
+            name: 'Chicken Taco',
+            restaurant: 'Tex-Mex',
+            price: 100,
+            type: 'nonveg',
+            image: 'https://picsum.photos/200?tc2',
+        },
+    ],
+
+    Fries: [
+        {
+            id: 'fr1',
+            name: 'French Fries',
+            restaurant: 'Burger King',
+            price: 60,
+            type: 'veg',
+            image: 'https://picsum.photos/200?fr1',
+        },
+        {
+            id: 'fr2',
+            name: 'Peri Peri Fries',
+            restaurant: 'McDonalds',
+            price: 75,
+            type: 'veg',
+            image: 'https://picsum.photos/200?fr2',
+        },
+    ],
+
+    Donut: [
+        {
+            id: 'dn1',
+            name: 'Choco Donut',
+            restaurant: 'Dunkin Donuts',
+            price: 70,
+            type: 'veg',
+            image: 'https://picsum.photos/200?dn1',
+        },
+        {
+            id: 'dn2',
+            name: 'Glazed Donut',
+            restaurant: 'Krispy Kreme',
+            price: 65,
+            type: 'veg',
+            image: 'https://picsum.photos/200?dn2',
         },
     ],
 };

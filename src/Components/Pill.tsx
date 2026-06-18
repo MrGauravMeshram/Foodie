@@ -4,6 +4,8 @@ import { Colors } from '../Theme/Color'
 import { Padding, Spacing } from '../Theme/Spacing'
 import { Fonts, fontsSize } from '../Theme/fonts'
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import { setSelectedCategory } from '../State/PopularSlice';
 
 
 type props = {
@@ -14,8 +16,11 @@ type props = {
 
 const Pill = ({ Data, active, onSelect }: props) => {
   const navigation = useNavigation<any>();
+  const dispatch = useDispatch();
+
   const onPressSelect = (item: any) => {
     onSelect(item.id)
+    dispatch(setSelectedCategory(item.title))
     navigation.navigate("PopularItem")
   }
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
+import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import RestaurantCard from '../../../Components/RestaurantCard'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Fonts, fontsSize } from '../../../Theme/fonts'
@@ -6,18 +6,32 @@ import { Padding } from '../../../Theme/Spacing'
 import { Colors } from '../../../Theme/Color'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
+import Animated, { SharedTransition } from 'react-native-reanimated';
 
 const ResaurantCardDetials = ({ Data }: any) => {
+  const navigation = useNavigation<any>();
+  const transition = SharedTransition.duration(550).springify();
 
   const renderCard = ({ item }: any) => {
     return (
-      <View style={Style.container}>
+      <TouchableOpacity
+        activeOpacity={0.9}
+        onPress={() => navigation.navigate('RestaurantDetials', { restaurant: item })}
+        style={Style.container}
+      >
         <View>
-          <RestaurantCard image={item.image} />
+          <RestaurantCard image={item.image} id={item.id} />
         </View>
         <View>
-          <Text style={Style.title}>{item.name}</Text>
-          <Text>{item.category}</Text>
+          <Animated.Text
+            style={Style.title}
+            sharedTransitionTag={`restaurant-title-${item.id}`}
+           
+          >
+            {item.name}
+          </Animated.Text>
+          <Text style={Style.subtitle}>{item.category}</Text>
         </View>
         <View style={Style.rate}>
           <View style={Style.icon}>
@@ -33,7 +47,7 @@ const ResaurantCardDetials = ({ Data }: any) => {
             <Text>{item.deliveryTime}</Text>
           </View>
         </View>
-      </View>
+      </TouchableOpacity>
     )
   }
 

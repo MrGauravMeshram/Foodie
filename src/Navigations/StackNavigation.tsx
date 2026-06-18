@@ -1,5 +1,5 @@
 
-import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, Text, TouchableOpacity } from 'react-native';
 import SplashScree from '../Screens/SplashScreen/SplashScree';
@@ -13,12 +13,13 @@ import HomeScreen from "../Screens/Home/HomeScreen";
 import LocationPremission from "../Screens/Auth/LocationPremission/LocationPremission";
 import HomeScreenHeader from "../Screens/Home/Components/HomeScreenHeader";
 import SearchScreen from "../Screens/Home/SearchScreen";
+import RestaurantDetials from "../Screens/ResaurantDetialsScreen/RestaurantDetials";
 import PopularItemScreen from "../Screens/Home/PopularItemScreen";
 
 import React from 'react'
 
 
-const Stack = createStackNavigator();
+const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
     return (
@@ -63,10 +64,11 @@ const StackNavigation = () => {
                         </TouchableOpacity>
                     ),
                 })} />
-                <Stack.Screen name="LocationPremission" component={LocationPremission} options={{headerShown:false}}/>
-                <Stack.Screen name = "HomeScreen" component={HomeScreen} options={{headerShown:false}} />
+                <Stack.Screen name="LocationPremission" component={LocationPremission} options={{ headerShown: false }} />
+                <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{headerShown:false}}/>
+                <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="RestaurantDetials" component={RestaurantDetials} options={{ headerShown: false, animation: 'fade', }} />
             </Stack.Navigator>
         </NavigationContainer>
     )

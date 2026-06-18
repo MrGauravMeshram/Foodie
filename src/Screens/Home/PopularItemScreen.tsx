@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, FlatList ,ScrollView} from 'react-native'
 import SearchHeader from './Components/SearchHeader'
 import { Colors } from '../../Theme/Color'
-import React, { useState } from 'react'
+import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Padding, Spacing } from '../../Theme/Spacing'
 import { Fonts, fontsSize } from '../../Theme/fonts'
@@ -9,16 +9,16 @@ import { FoodData } from '../../Data/FoodData'
 import { RestaurantData } from '../../Data/RestaurantData'
 import ResaurantCardDetials from './Components/ResaurantCardDetials'
 import FoodCard from '../../Components/FoodCard'
-
+import { useSelector, useDispatch } from 'react-redux'
+import { RootState } from '../../State/store'
+import { setSelectedCategory } from '../../State/PopularSlice'
+import { CategoriesData } from '../../Data/CategoriesData'
 
 const PopularItemScreen = () => {
-  const [selectedCategory, setSelectedCategory] = useState('Burger');
+  const dispatch = useDispatch();
+  const selectedCategory = useSelector((state: RootState) => state.popular.selectedCategory);
 
-  const categories = [
-    { id: '1', title: 'Burger' },
-    { id: '2', title: 'Pizza' },
-    { id: '3', title: 'Biryani' },
-  ];
+  const categories = CategoriesData;
 
   return (
     <SafeAreaView style={style.container}>
@@ -28,7 +28,7 @@ const PopularItemScreen = () => {
         title="Burger"
         data={categories}
         selectedValue={selectedCategory}
-        onSelect={(item: any) => setSelectedCategory(item.title)}
+        onSelect={(item: any) => dispatch(setSelectedCategory(item.title))}
         showFilter={true}
         onFilterPress={() => console.log('Filter pressed')}
       />
@@ -36,7 +36,7 @@ const PopularItemScreen = () => {
       <Text style={style.popularText}>Popular {selectedCategory}</Text>
 <View style={style.Popular}>
       <FlatList
-        data={FoodData[selectedCategory as keyof typeof FoodData]}
+        data={FoodData[selectedCategory as keyof typeof FoodData] || []}
         renderItem={({ item }) => (
           <FoodCard
             image={item.image}
