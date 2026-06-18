@@ -1,12 +1,15 @@
-
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ViewStyle } from 'react-native'
 import React from 'react'
 import { Colors } from '../Theme/Color'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
-const LeftArrow = () => {
+type Props = {
+    containerStyle?: ViewStyle;
+};
+
+const LeftArrow = ({ containerStyle }: Props) => {
     return (
-        <View style={style.container}>
+        <View style={[style.container, containerStyle]}>
             <Fontisto name="angle-left" color="#000" size={16} />
         </View>
     )

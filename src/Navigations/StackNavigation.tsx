@@ -9,8 +9,10 @@ import LeftArrow from '../Components/LeftArrow';
 import SignUp from '../Screens/Auth/AuthenticationScreen/SignUp'
 import VerificationScreen from '../Screens/Auth/AuthenticationScreen/VerificationScreen';
 import ForgotPassword from '../Screens/Auth/AuthenticationScreen/ForgotPassword';
+import HomeScreen from "../Screens/Home/HomeScreen";
 import LocationPremission from "../Screens/Auth/LocationPremission/LocationPremission";
-
+import HomeScreenHeader from "../Screens/Home/Components/HomeScreenHeader";
+import SearchScreen from "../Screens/Home/SearchScreen";
 
 import React from 'react'
 
@@ -61,6 +63,8 @@ const StackNavigation = () => {
                     ),
                 })} />
                 <Stack.Screen name="LocationPremission" component={LocationPremission} options={{headerShown:false}}/>
+                <Stack.Screen name = "HomeScreen" component={HomeScreen} options={{headerShown:false}} />
+                <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )

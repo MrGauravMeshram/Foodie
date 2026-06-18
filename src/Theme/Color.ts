@@ -5,6 +5,21 @@ export const Colors = {
     InputBox: "#F0F5FA",
     black: "#121223",
     white: "#FFFFFF",
-    gray: "grey"
+    searchBar: "#d0d4d7",
+    gray: "grey",
+    semiBlack: "#181C2E",
+    sideBarIcon: "#ECF0F4",
+    whiteIcon: "#FFF",
+    BlackIcon: "#000",
+    subtitleColor: "#32343E",
 
+    couponGradStart: "#FFD200",
+    couponGradMiddle: "#FF9F00",
+    couponGradEnd: "#FF6100",
+    couponCloseBg: "#FFE08A",
+    couponCloseText: "#FF7A00",
+    couponBtnBg: "#E05300",
+    couponTitleSize: 34,
+    couponCodeSize: 26,
+    couponDescSize: 16,
 }

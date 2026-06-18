@@ -13,5 +13,6 @@ export const fontsSize = {
     sm:14,
     exsm : 12,
     md : 18,
+    smd:20,
     exlarge : 30
 }
