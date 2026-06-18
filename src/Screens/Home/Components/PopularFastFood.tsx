@@ -3,7 +3,7 @@ import { Fonts,fontsSize } from '../../../Theme/fonts'
 import FoodCard from '../../../Components/FoodCard'
 import React from 'react'
 
-const PopularFastFood = () => {
+const PopularFastFood = ({ data }: any) => {
   return (
     <View>
     <View>

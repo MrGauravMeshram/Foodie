@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,TouchableOpacity,Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import React from 'react'
 
 type FoodCardProps = {
@@ -16,7 +16,7 @@ const FoodCard = ({
 }: FoodCardProps) => {
   return (
     <View style={styles.card}>
-      <Image source={{uri: image}} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} resizeMode='contain' />
 
       <Text style={styles.title}>{title}</Text>
 
@@ -38,7 +38,7 @@ export default FoodCard
 const styles = StyleSheet.create({
   card: {
     width: 180,
-    alignSelf:"center",
+    alignSelf: "center",
     backgroundColor: '#fff',
     borderRadius: 24,
     padding: 12,

@@ -23,7 +23,7 @@ const SearchScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <SearchHeader />
+            <SearchHeader icon="shopping-bag" title="Search"/>
 
             <ScrollView
                 showsVerticalScrollIndicator={false}

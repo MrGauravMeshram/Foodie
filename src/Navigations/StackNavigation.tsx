@@ -13,6 +13,7 @@ import HomeScreen from "../Screens/Home/HomeScreen";
 import LocationPremission from "../Screens/Auth/LocationPremission/LocationPremission";
 import HomeScreenHeader from "../Screens/Home/Components/HomeScreenHeader";
 import SearchScreen from "../Screens/Home/SearchScreen";
+import PopularItemScreen from "../Screens/Home/PopularItemScreen";
 
 import React from 'react'
 
@@ -65,6 +66,7 @@ const StackNavigation = () => {
                 <Stack.Screen name="LocationPremission" component={LocationPremission} options={{headerShown:false}}/>
                 <Stack.Screen name = "HomeScreen" component={HomeScreen} options={{headerShown:false}} />
                 <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{headerShown:false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

@@ -12,6 +12,7 @@ import CouponModal from './Components/CoupenModal';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import HomeScreenHeader from './Components/HomeScreenHeader';
+import {FoodCardData} from '../../Data/FoodCardData'
 import FoodCardmenu from './Components/FoodCardmenu';
 const HomeScreen = ({route}:any) => {
     const [showModal, setShowModal] = useState(false);
@@ -53,9 +54,12 @@ return(
            <MaterialIcons name="keyboard-arrow-right" color={Colors.lightGrey} size={26} />
       </View>
     </View>
-    <View>
+    <TouchableOpacity onPress={() => navigation.navigate("PopularItem")}>
  <Pill Data = {CategoriesData} active={selectedCategory}
   onSelect={setSelectedCategory}/>
+    </TouchableOpacity>
+     <View style={{marginTop:15}}>
+    <FoodCardmenu Data ={FoodCardData}/>
     </View>
      <View style={Style.Categories}>
       <Text style={Style.CategoriesTitle}>Open Restaurants</Text>
@@ -64,9 +68,8 @@ return(
            <MaterialIcons name="keyboard-arrow-right" color={Colors.lightGrey} size={26} />
       </View>
     </View>
-    <View>
-      <FoodCardmenu/>
-    </View>
+
+   
 <View>
   <ResaurantCardDetials Data = {RestaurantData}/>
 </View>
