@@ -3,6 +3,7 @@ import React from 'react'
 import { Colors } from '../Theme/Color'
 import { Padding, Spacing } from '../Theme/Spacing'
 import { Fonts, fontsSize } from '../Theme/fonts'
+import { useNavigation } from '@react-navigation/native';
 
 
 type props = {
@@ -12,13 +13,18 @@ type props = {
 }
 
 const Pill = ({ Data, active, onSelect }: props) => {
+  const navigation = useNavigation<any>();
+  const onPressSelect = (item: any) => {
+    onSelect(item.id)
+    navigation.navigate("PopularItem")
+  }
 
   const renderPill = ({ item, index }: any) => {
     const isSelected = active === item.id;
     return (
       <TouchableOpacity
         activeOpacity={0.8}
-        onPress={() => onSelect(item.id)}
+        onPress={() => onPressSelect(item)}
         style={[
           Style.container,
           {
@@ -65,7 +71,7 @@ const Style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-evenly",
     borderRadius: 40,
-    marginBottom:10,
+    marginBottom: 10,
     paddingHorizontal: 10,
     marginTop: Spacing.md,
     flexDirection: "row",
