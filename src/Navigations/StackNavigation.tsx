@@ -15,7 +15,7 @@ import HomeScreenHeader from "../Screens/Home/Components/HomeScreenHeader";
 import SearchScreen from "../Screens/Home/SearchScreen";
 import RestaurantDetials from "../Screens/ResaurantDetialsScreen/RestaurantDetials";
 import PopularItemScreen from "../Screens/Home/PopularItemScreen";
-
+import BottomNavigation from "./BottomNavigation";
 import React from 'react'
 
 
@@ -65,7 +65,7 @@ const StackNavigation = () => {
                     ),
                 })} />
                 <Stack.Screen name="LocationPremission" component={LocationPremission} options={{ headerShown: false }} />
-                <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="BottomNavigation" component={BottomNavigation} options={{ headerShown: false }} />
                 <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="RestaurantDetials" component={RestaurantDetials} options={{ headerShown: false, animation: 'fade', }} />

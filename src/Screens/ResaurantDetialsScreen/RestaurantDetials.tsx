@@ -92,13 +92,11 @@ const RestaurantDetials = () => {
           </View>
 
         
-          <Animated.Text
+          <Text
             style={style.restaurantName}
-            sharedTransitionTag={`restaurant-title-${currentRestaurant.id}`}
-          
           >
             {currentRestaurant.name}
-          </Animated.Text>
+          </Text>
 
           <Text style={style.description}>
             Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.

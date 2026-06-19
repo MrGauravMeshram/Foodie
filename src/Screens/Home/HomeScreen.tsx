@@ -20,7 +20,7 @@ const HomeScreen = ({route}:any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('1');
   const navigation = useNavigation<any>();
-  const { city, state, address } = route.params;
+  const { city, state, address } = route.params || {};
 
   const insets = useSafeAreaInsets();
   const topInset = insets.top;

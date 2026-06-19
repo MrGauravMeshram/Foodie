@@ -24,13 +24,11 @@ const ResaurantCardDetials = ({ Data }: any) => {
           <RestaurantCard image={item.image} id={item.id} />
         </View>
         <View>
-          <Animated.Text
+          <Text
             style={Style.title}
-            sharedTransitionTag={`restaurant-title-${item.id}`}
-           
           >
             {item.name}
-          </Animated.Text>
+          </Text>
           <Text style={Style.subtitle}>{item.category}</Text>
         </View>
         <View style={Style.rate}>

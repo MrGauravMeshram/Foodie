@@ -60,13 +60,16 @@ const data = JSON.parse(text);
   console.log('City:', city);
   console.log('Address:', address);
 
-  navigation.navigate('HomeScreen', {
-    area,
-    city,
-    state,
-    address,
-    latitude,
-    longitude,
+  navigation.navigate('BottomNavigation', {
+    screen: 'Home',
+    params: {
+      area,
+      city,
+      state,
+      address,
+      latitude,
+      longitude,
+    },
   });
 
 } catch (error) {

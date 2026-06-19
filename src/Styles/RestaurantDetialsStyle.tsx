@@ -4,7 +4,7 @@ import { Dimensions } from "react-native";
 import { Padding,Spacing } from "../Theme/Spacing";
 import {Fonts,fontsSize} from '../Theme/fonts'
 
-const screenWidth = Dimensions.get("window")
+const { width: screenWidth } = Dimensions.get("window");
 
 export const style = StyleSheet.create({
   container: {
