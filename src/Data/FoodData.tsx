@@ -32,14 +32,7 @@ export const FoodData = {
             type: 'nonveg',
             image: 'https://picsum.photos/200?4',
         },
-        {
-            id: 'all_5',
-            name: 'Club Sandwich',
-            restaurant: 'The Green Club',
-            price: 65,
-            type: 'veg',
-            image: 'https://picsum.photos/200?5',
-        },
+
     ],
 
     Burger: [
@@ -75,14 +68,7 @@ export const FoodData = {
             type: 'nonveg',
             image: 'https://i.pinimg.com/736x/83/fd/f3/83fdf3191361bd07fcc3cf331695fc9f.jpg',
         },
-        {
-            id: 'b5',
-            name: 'Veg Burger',
-            restaurant: 'Green Bowl',
-            price: 55,
-            type: 'veg',
-            image: 'https://i.pinimg.com/736x/aa/f3/aa/aaf3aa4e15769c860aff8b2a22edfc78.jpg',
-        },
+
     ],
 
     Pizza: [
@@ -118,14 +104,7 @@ export const FoodData = {
             type: 'nonveg',
             image: 'https://i.pinimg.com/736x/0d/4b/9a/0d4b9a2e16bcb258ca53aa1dbfeb7de0.jpg',
         },
-        {
-            id: 'p5',
-            name: 'Paneer Pizza',
-            restaurant: 'Italian Oven',
-            price: 200,
-            type: 'veg',
-            image: 'https://i.pinimg.com/1200x/d6/c9/1d/d6c91d4f1dd63c1eb23d98b8736c31ed.jpg',
-        },
+
     ],
 
     'Hot Dog': [
@@ -199,14 +178,7 @@ export const FoodData = {
             type: 'veg',
             image: 'https://i.pinimg.com/736x/c2/9c/13/c29c134ad322f85ec6bdb7fe6bcc3a57.jpg',
         },
-        {
-            id: 'by5',
-            name: 'Special Biryani',
-            restaurant: 'Pista House',
-            price: 320,
-            type: 'nonveg',
-            image: 'https://i.pinimg.com/736x/b2/ca/33/b2ca3393908473560883bf77ebb7c082.jpg',
-        },
+
     ],
 
     Pasta: [

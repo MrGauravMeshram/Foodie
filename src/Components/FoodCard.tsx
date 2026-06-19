@@ -1,5 +1,8 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated'
+import { Colors } from '../Theme/Color'
+import { Fonts, fontsSize } from '../Theme/fonts'
 
 type FoodCardProps = {
   image: any;
@@ -14,21 +17,69 @@ const FoodCard = ({
   restaurant,
   price,
 }: FoodCardProps) => {
+  const [quantity, setQuantity] = useState(0);
+
+  const animatedWidth = useSharedValue(34);
+
+  useEffect(() => {
+    if (quantity > 0) {
+      animatedWidth.value = withTiming(85, { duration: 250, easing: Easing.bezier(0.25, 1, 0.5, 1) });
+    } else {
+      animatedWidth.value = withTiming(34, { duration: 250, easing: Easing.bezier(0.25, 1, 0.5, 1) });
+    }
+  }, [quantity]);
+
+  const containerStyle = useAnimatedStyle(() => {
+    return {
+      width: animatedWidth.value,
+    };
+  });
+
+  const handleIncrease = () => {
+    setQuantity(prev => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 0) {
+      setQuantity(prev => prev - 1);
+    }
+  };
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: image }} style={styles.image} resizeMode='contain' />
 
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title} numberOfLines={1}>{title}</Text>
 
-      <Text style={styles.subtitle}>{restaurant}</Text>
+      <Text style={styles.subtitle} numberOfLines={1}>{restaurant}</Text>
 
       <View style={styles.footer}>
         <Text style={styles.price}>${price}</Text>
 
-        <TouchableOpacity style={styles.addButton}
-        >
-          <Text style={styles.plus}>+</Text>
-        </TouchableOpacity>
+        <Animated.View style={[styles.counterContainer, containerStyle]}>
+          {/* Minus button */}
+          <TouchableOpacity 
+            style={styles.counterButton} 
+            onPress={handleDecrease}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.counterButtonText}>-</Text>
+          </TouchableOpacity>
+
+          {/* Quantity text */}
+          <View style={styles.quantityWrapper}>
+            <Text style={styles.quantityText}>{quantity}</Text>
+          </View>
+
+          {/* Plus button */}
+          <TouchableOpacity 
+            style={styles.plusButton} 
+            onPress={handleIncrease}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.plusButtonText}>+</Text>
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     </View>
   );
@@ -40,7 +91,7 @@ const styles = StyleSheet.create({
   card: {
     width: 180,
     alignSelf: "center",
-    backgroundColor: '#fff',
+    backgroundColor: Colors.white,
     borderRadius: 24,
     padding: 12,
     margin: 10,
@@ -62,15 +113,16 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
-    fontWeight: '700',
-    color: '#2D2D2D',
+    fontFamily: Fonts.senBold,
+    fontSize: fontsSize.md,
+    color: Colors.semiBlack,
     marginTop: 8,
   },
 
   subtitle: {
-    fontSize: 14,
-    color: '#8B8B97',
+    fontFamily: Fonts.senRegular,
+    fontSize: fontsSize.sm,
+    color: Colors.lightGrey,
     marginTop: 4,
   },
 
@@ -82,25 +134,63 @@ const styles = StyleSheet.create({
   },
 
   price: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#2D2D2D',
+    fontFamily: Fonts.senBold,
+    fontSize: fontsSize.smd,
+    color: Colors.semiBlack,
   },
 
-  addButton: {
-    width: 34,
+  counterContainer: {
     height: 34,
+    backgroundColor: Colors.btnColor,
     borderRadius: 17,
-    backgroundColor: '#F7931E',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    paddingHorizontal: 5,
+    overflow: 'hidden',
+  },
+
+  counterButton: {
+    width: 24,
+    height: 34,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
-  plus: {
-    color: '#fff',
-    fontSize: 22,
-    fontWeight: '700',
-    lineHeight: 24,
+  counterButtonText: {
+    color: Colors.white,
+    fontFamily: Fonts.senBold,
+    fontSize: 18,
+    textAlign: 'center',
+    lineHeight: Platform.OS === 'ios' ? 18 : 22,
+  },
+
+  quantityWrapper: {
+    width: 27,
+    height: 34,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  quantityText: {
+    color: Colors.white,
+    fontFamily: Fonts.senBold,
+    fontSize: 16,
+    textAlign: 'center',
+  },
+
+  plusButton: {
+    width: 24,
+    height: 34,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  plusButtonText: {
+    color: Colors.white,
+    fontFamily: Fonts.senBold,
+    fontSize: 18,
+    textAlign: 'center',
+    lineHeight: Platform.OS === 'ios' ? 18 : 22,
   },
 });
-

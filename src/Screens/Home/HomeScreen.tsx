@@ -50,9 +50,10 @@ const HomeScreen = ({ route }: any) => {
     setPillY(y);
   };
 
-  const timingConfig = useRef({
-    duration: 350,
-    easing: Easing.bezier(0.25, 1, 0.5, 1),
+  const springConfig = useRef({
+    damping: 18,
+    stiffness: 90,
+    mass: 0.8,
   }).current;
 
   const handleScroll = (value: number) => {
@@ -65,7 +66,7 @@ const HomeScreen = ({ route }: any) => {
     if (value < limit) {
       if (tabBarState.current !== 0) {
         tabBarState.current = 0;
-        tabBarTranslateY.value = withTiming(0, timingConfig);
+        tabBarTranslateY.value = withSpring(0, springConfig);
       }
       return;
     }
@@ -74,7 +75,7 @@ const HomeScreen = ({ route }: any) => {
     if (layoutHeight.current > 0 && contentHeight.current > 0 && (value + layoutHeight.current >= contentHeight.current - 50)) {
       if (tabBarState.current !== 0) {
         tabBarState.current = 0;
-        tabBarTranslateY.value = withTiming(0, timingConfig);
+        tabBarTranslateY.value = withSpring(0, springConfig);
       }
       return;
     }
@@ -83,13 +84,20 @@ const HomeScreen = ({ route }: any) => {
     if (diff > 0.05) {
       if (tabBarState.current !== 150) {
         tabBarState.current = 150;
-        tabBarTranslateY.value = withTiming(150, timingConfig);
+        tabBarTranslateY.value = withSpring(150, springConfig);
       }
     } else if (diff < -0.05) {
       if (tabBarState.current !== 0) {
         tabBarState.current = 0;
-        tabBarTranslateY.value = withTiming(0, timingConfig);
+        tabBarTranslateY.value = withSpring(0, springConfig);
       }
+    }
+  };
+
+  const handleScrollEnd = () => {
+    if (tabBarState.current !== 0) {
+      tabBarState.current = 0;
+      tabBarTranslateY.value = withSpring(0, springConfig);
     }
   };
 
@@ -148,9 +156,14 @@ const HomeScreen = ({ route }: any) => {
         )}
         onScrollEndDrag={(event) => {
           handleScroll(event.nativeEvent.contentOffset.y);
+          const velocityY = event.nativeEvent.velocity?.y ?? 0;
+          if (velocityY === 0) {
+            handleScrollEnd();
+          }
         }}
         onMomentumScrollEnd={(event) => {
           handleScroll(event.nativeEvent.contentOffset.y);
+          handleScrollEnd();
         }}
         onLayout={(event) => {
           layoutHeight.current = event.nativeEvent.layout.height;
