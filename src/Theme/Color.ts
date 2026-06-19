@@ -1,4 +1,4 @@
-export const Colors = {
+export const LightColors = {
     backgroundColor: "#FFFFFF",
     btnColor: "#FF7622",
     lightGrey: "#646982",
@@ -29,4 +29,26 @@ export const Colors = {
     zomatoRedLight: "#FFF0F2",
     zomatoInactive: "#5A5A5A",
     zomatoBg: "#FFFFFF",
-}
+};
+
+export const DarkColors = {
+    ...LightColors,
+    backgroundColor: "#121223",
+    lightGrey: "#9CA3AF",
+    InputBox: "#1E293B",
+    black: "#FFFFFF",
+    white: "#121223",
+    searchBar: "#1E293B",
+    gray: "#9CA3AF",
+    semiBlack: "#FFFFFF",
+    sideBarIcon: "#1E293B",
+    lightWhite: "#1C1C1E",
+    BlackIcon: "#FFF",
+    subtitleColor: "#D1D5DB",
+    backgroundColorBlack: "#121223", // Keep it dark as the Cart screen uses this background
+    zomatoRedLight: "#3A1E20",
+    zomatoInactive: "#9CA3AF",
+    zomatoBg: "#1C1C1E",
+};
+
+export const Colors = LightColors;

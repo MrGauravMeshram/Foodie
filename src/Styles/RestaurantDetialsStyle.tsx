@@ -1,15 +1,14 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../Theme/Color";
 import { Dimensions } from "react-native";
 import { Padding,Spacing } from "../Theme/Spacing";
 import {Fonts,fontsSize} from '../Theme/fonts'
 
 const { width: screenWidth } = Dimensions.get("window");
 
-export const style = StyleSheet.create({
+export const getStyle = (colors: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.backgroundColor,
   },
   imageContainer: {
     width: screenWidth,
@@ -26,13 +25,13 @@ export const style = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     position: 'absolute',
     top: 20,
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 3,
-    shadowColor: Colors.black,
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 4,
@@ -55,7 +54,7 @@ export const style = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.white,
     borderWidth: 1.5,
     borderColor: 'transparent',
   },
@@ -83,18 +82,18 @@ export const style = StyleSheet.create({
   infoText: {
     fontFamily: Fonts.senMedium,
     fontSize: fontsSize.sm,
-    color: Colors.subtitleColor,
+    color: colors.subtitleColor,
   },
   restaurantName: {
     fontFamily: Fonts.senBold,
     fontSize: fontsSize.large,
-    color: Colors.black,
+    color: colors.black,
     marginVertical: 8,
   },
   description: {
     fontFamily: Fonts.senRegular,
     fontSize: fontsSize.sm,
-    color: Colors.lightGrey,
+    color: colors.lightGrey,
     lineHeight: 20,
   },
   pillsContainer: {
@@ -121,7 +120,7 @@ export const style = StyleSheet.create({
   foodSectionTitle: {
     fontFamily: Fonts.senSemiBold,
     fontSize: fontsSize.md,
-    color: Colors.black,
+    color: colors.black,
   },
   gridContainer: {
     paddingHorizontal: Padding.lPadding - 4,
@@ -132,14 +131,14 @@ export const style = StyleSheet.create({
   },
   foodCard: {
     width: '48%',
-    backgroundColor: Colors.white,
+    backgroundColor: colors.lightWhite,
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: '#F0F0F0',
+    borderColor: colors.lightWhite === '#1C1C1E' ? '#2C2C2E' : '#F0F0F0',
     marginBottom: 16,
     padding: 10,
     elevation: 2,
-    shadowColor: Colors.black,
+    shadowColor: colors.black,
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.08,
     shadowRadius: 3,
@@ -163,12 +162,12 @@ export const style = StyleSheet.create({
   foodTitle: {
     fontFamily: Fonts.senBold,
     fontSize: fontsSize.sm,
-    color: Colors.black,
+    color: colors.black,
   },
   foodRestaurant: {
     fontFamily: Fonts.senRegular,
     fontSize: fontsSize.exsm,
-    color: Colors.lightGrey,
+    color: colors.lightGrey,
     marginVertical: 4,
   },
   priceRow: {
@@ -180,13 +179,13 @@ export const style = StyleSheet.create({
   foodPrice: {
     fontFamily: Fonts.senBold,
     fontSize: fontsSize.sm,
-    color: Colors.black,
+    color: colors.black,
   },
   addButton: {
     width: 28,
     height: 28,
     borderRadius: 14,
-    backgroundColor: Colors.btnColor,
+    backgroundColor: colors.btnColor,
     justifyContent: 'center',
     alignItems: 'center',
   },

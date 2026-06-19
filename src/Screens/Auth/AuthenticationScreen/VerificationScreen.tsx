@@ -1,18 +1,21 @@
 import { View, Text, TextInput, StatusBar, Image, StyleSheet } from 'react-native'
 import React, { useState, useRef } from 'react'
 import { Button } from '../../../Components/Button'
-import { Colors } from '../../../Theme/Color'
-import { Styles } from '../../../Styles/AuthStyle'
+import { getStyles as getAuthStyles } from '../../../Styles/AuthStyle'
+import { useTheme } from '../../../Hooks/useTheme'
+import { useThemeStyles } from '../../../Hooks/useThemeStyles'
 
 const VerificationScreen = () => {
     const [code, setCode] = useState(['', '', '', '']);
     const inputs = useRef<any>([]);
+    const { colors } = useTheme();
+    const AuthStyles = useThemeStyles(getAuthStyles);
+    const styles = useThemeStyles(getStyles);
 
     const handleChangeText = (text: string, index: number) => {
         const newCode = [...code];
         newCode[index] = text;
         setCode(newCode);
-
 
         if (text && index < 3) {
             inputs.current[index + 1]?.focus();
@@ -26,17 +29,17 @@ const VerificationScreen = () => {
     };
 
     return (
-        <View style={Styles.container}>
+        <View style={AuthStyles.container}>
             <StatusBar barStyle="light-content" />
-            <Image source={require('../../../Assets/Images/Ellipse.png')} style={Styles.ellipse} />
+            <Image source={require('../../../Assets/Images/Ellipse.png')} style={AuthStyles.ellipse} />
 
-            <View style={Styles.upperSec}>
-                <Text style={Styles.title}>Verification</Text>
-                <Text style={[Styles.subtitle, { marginTop: 15 }]}>We have sent a code to your email</Text>
-                <Text style={[Styles.subtitle, { fontFamily: 'Sen-Bold' }]}>example@gmail.com</Text>
+            <View style={AuthStyles.upperSec}>
+                <Text style={AuthStyles.title}>Verification</Text>
+                <Text style={[AuthStyles.subtitle, { marginTop: 15 }]}>We have sent a code to your email</Text>
+                <Text style={[AuthStyles.subtitle, { fontFamily: 'Sen-Bold' }]}>example@gmail.com</Text>
             </View>
 
-            <View style={Styles.lowerSec}>
+            <View style={AuthStyles.lowerSec}>
                 <View style={styles.labelRow}>
                     <Text style={styles.codeLabel}>CODE</Text>
                     <Text style={styles.resendText}>
@@ -69,7 +72,7 @@ const VerificationScreen = () => {
 
 export default VerificationScreen
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     labelRow: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -79,18 +82,18 @@ const styles = StyleSheet.create({
     codeLabel: {
         fontSize: 14,
         fontFamily: 'Sen-Bold',
-        color: '#32343E',
+        color: colors.black,
         textTransform: 'uppercase'
     },
     resendText: {
         fontSize: 14,
         fontFamily: 'Sen-Regular',
-        color: '#7E838F'
+        color: colors.lightGrey,
     },
     resendBtn: {
         textDecorationLine: 'underline',
         fontFamily: 'Sen-Bold',
-        color: '#32343E'
+        color: colors.black,
     },
     otpContainer: {
         flexDirection: 'row',
@@ -102,10 +105,10 @@ const styles = StyleSheet.create({
         width: 62,
         height: 62,
         borderRadius: 12,
-        backgroundColor: Colors.InputBox,
+        backgroundColor: colors.InputBox,
         textAlign: 'center',
         fontSize: 20,
         fontFamily: 'Sen-Bold',
-        color: Colors.black
+        color: colors.black
     }
 })

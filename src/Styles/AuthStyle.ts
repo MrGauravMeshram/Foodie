@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
-import { Colors } from '../Theme/Color';
 
-
-export const Styles = StyleSheet.create({
+export const getStyles = (colors: any) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.black,
+        backgroundColor: colors.backgroundColorBlack,
     },
     upperSec: {
         height: "33%",
@@ -13,21 +11,21 @@ export const Styles = StyleSheet.create({
     },
     lowerSec: {
         height: "80%",
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: colors.backgroundColor,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
         paddingHorizontal: 24,
         paddingTop: 30,
     },
     title: {
-        color: Colors.white,
+        color: '#FFFFFF',
         fontSize: 30,
         marginTop: 100,
         fontFamily: "Sen-SemiBold",
         textAlign: "center",
     },
     subtitle: {
-        color: Colors.white,
+        color: '#FFFFFF',
         fontSize: 16,
         fontFamily: "Sen-Regular",
         marginTop: 5,
@@ -49,36 +47,31 @@ export const Styles = StyleSheet.create({
         marginLeft: 8,
         fontSize: 13,
         fontFamily: 'Sen-Regular',
-        color: Colors.lightGrey,
+        color: colors.lightGrey,
     },
     forgetPassword: {
-        color: Colors.btnColor,
+        color: colors.btnColor,
         fontSize: 14,
         textAlign: "center",
-
         fontFamily: 'Sen-Regular',
         marginTop: 18,
         alignSelf: 'flex-end',
     },
-
     bottomSec: {
         flexDirection: "row",
         alignItems: 'center',
         marginTop: 35,
         gap: 8,
         justifyContent: "center",
-
     },
     bottomText: {
-        color: Colors.btnColor,
+        color: colors.btnColor,
         fontSize: 16,
         fontFamily: 'Sen-Bold',
     },
     bottomtitle: {
         fontSize: 18,
-        color: Colors.lightGrey,
+        color: colors.lightGrey,
         fontFamily: 'Sen-Regular',
     }
-
-
 })

@@ -1,14 +1,17 @@
 import {View, Text, StyleSheet, Image, Alert, Linking} from 'react-native';
-import {Colors} from '../../../Theme/Color';
 import {Button} from '../../../Components/Button';
 import React from 'react';
 import {Spacing} from '../../../Theme/Spacing';
 import {Fonts, fontsSize as FontSize} from '../../../Theme/fonts';
 import Geolocation from 'react-native-geolocation-service';
-
+import {useTheme} from '../../../Hooks/useTheme';
+import {useThemeStyles} from '../../../Hooks/useThemeStyles';
 import {requestLocationPermission} from '../../../Utils/LocationRequest';
 
 const LocationPremission = ({navigation}: any) => {
+  const { colors } = useTheme();
+  const style = useThemeStyles(getStyles);
+
   const getCurrentLocation = async () => {
     const hasPermission = await requestLocationPermission();
 
@@ -111,12 +114,12 @@ const data = JSON.parse(text);
 
 export default LocationPremission;
 
-const style = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
   Container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: Colors.white,
+    backgroundColor: colors.backgroundColor,
   },
   imageContainer: {
     justifyContent: 'center',
@@ -135,6 +138,6 @@ const style = StyleSheet.create({
     textAlign: 'center',
     width: 300,
     marginTop: Spacing.md,
-    color: Colors.gray,
+    color: colors.gray,
   },
 });

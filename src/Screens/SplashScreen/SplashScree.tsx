@@ -1,7 +1,11 @@
 import { View, StyleSheet, Image, StatusBar } from 'react-native'
 import React, { useEffect } from 'react'
+import { useTheme } from '../../Hooks/useTheme'
+import { useThemeStyles } from '../../Hooks/useThemeStyles'
 
 const SplashScree = ({ navigation }: any) => {
+    const { colors, isDarkMode } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -9,24 +13,26 @@ const SplashScree = ({ navigation }: any) => {
         }, 2000)
         return () => clearTimeout(timer);
     }, [navigation])
+
     return (
         <View style={styles.container}>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle={isDarkMode ? "light-content" : "dark-content"} />
+
             <Image source={require('../../Assets/Images/EllipseTop.png')} style={styles.EllipseTop} resizeMode='contain' />
             <Image source={require('../../Assets/Images/Logo.png')} style={styles.logo} resizeMode='contain' />
             <Image source={require('../../Assets/Images/EllipseBottom.png')} style={styles.EllipseBottom} resizeMode='cover' />
-
         </View>
     )
 }
 
 export default SplashScree
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: colors.backgroundColor,
     },
     logo: {
         width: 150,
@@ -35,17 +41,14 @@ const styles = StyleSheet.create({
     EllipseBottom: {
         width: 250,
         height: 300,
-
         position: 'absolute',
         bottom: -40,
-
         right: -0,
         zIndex: 1
     },
     EllipseTop: {
         width: 250,
         height: 300,
-
         position: 'absolute',
         top: -100,
         left: -40,

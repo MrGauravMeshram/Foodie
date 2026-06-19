@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, FlatList ,ScrollView} from 'react-native'
 import SearchHeader from './Components/SearchHeader'
-import { Colors } from '../../Theme/Color'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Padding, Spacing } from '../../Theme/Spacing'
@@ -13,16 +12,20 @@ import { useSelector, useDispatch } from 'react-redux'
 import { RootState } from '../../State/store'
 import { setSelectedCategory } from '../../State/PopularSlice'
 import { CategoriesData } from '../../Data/CategoriesData'
+import { useTheme } from '../../Hooks/useTheme';
+import { useThemeStyles } from '../../Hooks/useThemeStyles';
 
 const PopularItemScreen = () => {
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state: RootState) => state.popular.selectedCategory);
+  const { colors } = useTheme();
+  const style = useThemeStyles(getStyle);
 
   const categories = CategoriesData;
 
   return (
     <SafeAreaView style={style.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
       <SearchHeader
         icon="search"
         title="Burger"
@@ -34,48 +37,48 @@ const PopularItemScreen = () => {
       />
 
       <Text style={style.popularText}>Popular {selectedCategory}</Text>
-<View style={style.Popular}>
-      <FlatList
-        data={FoodData[selectedCategory as keyof typeof FoodData] || []}
-        renderItem={({ item }) => (
-          <FoodCard
-            image={item.image}
-            title={item.name}
-            restaurant={item.restaurant}
-            price={item.price}
-          />
-        )}
-        keyExtractor={(item) => item.id}
-        numColumns={2}
-        showsVerticalScrollIndicator={false}
-        columnWrapperStyle={style.columnWrapper}
-        contentContainerStyle={style.listContent}
-        scrollEnabled={false}
-      />
+      <View style={style.Popular}>
+        <FlatList
+          data={FoodData[selectedCategory as keyof typeof FoodData] || []}
+          renderItem={({ item }) => (
+            <FoodCard
+              image={item.image}
+              title={item.name}
+              restaurant={item.restaurant}
+              price={item.price}
+            />
+          )}
+          keyExtractor={(item) => item.id}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          columnWrapperStyle={style.columnWrapper}
+          contentContainerStyle={style.listContent}
+          scrollEnabled={false}
+        />
       </View>
       <View>
          <Text style={style.CategoriesTitle}>Open Restaurants</Text>
       </View>
       <View>
-  <ResaurantCardDetials Data = {RestaurantData}/>
-</View>
-</ScrollView>
+         <ResaurantCardDetials Data = {RestaurantData}/>
+      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 export default PopularItemScreen
 
-const style = StyleSheet.create({
+const getStyle = (colors: any) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Colors.white,
+    backgroundColor: colors.backgroundColor,
     paddingHorizontal: Padding.mPadding
   },
   popularText: {
     fontSize: fontsSize.smd,
     fontFamily: Fonts.senMedium,
-    color: Colors.semiBlack,
+    color: colors.semiBlack,
     marginTop: 15,
     marginBottom: 10,
   },
@@ -89,10 +92,10 @@ const style = StyleSheet.create({
   Popular:{
       height:550
   },
-   CategoriesTitle:{
-       color:Colors.subtitleColor,
-       fontFamily:Fonts.senSemiBold,
-       fontSize:fontsSize.smd,
-       marginTop:Spacing.md
-    },
+  CategoriesTitle:{
+      color:colors.subtitleColor,
+      fontFamily:Fonts.senSemiBold,
+      fontSize:fontsSize.smd,
+      marginTop:Spacing.md
+  },
 })

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import popularReducer from './PopularSlice';
+import themeReducer from './ThemeSlice';
 
 export const store = configureStore({
   reducer: {
     popular: popularReducer,
+    theme: themeReducer,
   },
 });
 

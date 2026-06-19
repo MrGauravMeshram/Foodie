@@ -1,18 +1,16 @@
 import { StyleSheet } from "react-native"
-import { Colors } from "../Theme/Color"
 import { Fonts, fontsSize } from "../Theme/fonts"
 import { Dimensions } from "react-native"
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
-export const styles = StyleSheet.create({
+export const getStyles = (colors: any) => StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingVertical: 15,
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: colors.backgroundColor,
         zIndex: 10,
-
     },
     leftSection: {
         flexDirection: 'row',
@@ -24,7 +22,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     backButton: {
-        backgroundColor: Colors.sideBarIcon,
+        backgroundColor: colors.sideBarIcon,
         height: 45,
         width: 45,
         borderRadius: 22.5,
@@ -32,7 +30,7 @@ export const styles = StyleSheet.create({
     title: {
         fontSize: fontsSize.smd,
         fontFamily: Fonts.senMedium,
-        color: Colors.semiBlack,
+        color: colors.semiBlack,
         flex: 1,
         marginLeft: 20,
     },
@@ -40,7 +38,7 @@ export const styles = StyleSheet.create({
         width: 45,
         height: 45,
         borderRadius: 22.5,
-        backgroundColor: Colors.semiBlack,
+        backgroundColor: colors.semiBlack,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
@@ -52,9 +50,9 @@ export const styles = StyleSheet.create({
     pillButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: Colors.white,
+        backgroundColor: colors.white,
         borderWidth: 1,
-        borderColor: Colors.sideBarIcon,
+        borderColor: colors.sideBarIcon,
         borderRadius: 22.5,
         paddingVertical: 10,
         paddingHorizontal: 16,
@@ -63,7 +61,7 @@ export const styles = StyleSheet.create({
     pillText: {
         fontSize: fontsSize.sm,
         fontFamily: Fonts.senBold,
-        color: Colors.semiBlack,
+        color: colors.semiBlack,
     },
     pillChevron: {
         marginLeft: 8,
@@ -81,10 +79,10 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         top: 50,
         left: 15,
-        backgroundColor: Colors.white,
+        backgroundColor: colors.white,
         borderRadius: 12,
         borderWidth: 1,
-        borderColor: Colors.sideBarIcon,
+        borderColor: colors.sideBarIcon,
         minWidth: 140,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -103,26 +101,27 @@ export const styles = StyleSheet.create({
     dropdownItemText: {
         fontSize: fontsSize.sm,
         fontFamily: Fonts.senRegular,
-        color: Colors.semiBlack,
+        color: colors.semiBlack,
     },
     selectedItemText: {
         fontFamily: Fonts.senBold,
-        color: Colors.btnColor,
+        color: colors.btnColor,
     },
     filterButton: {
         width: 45,
         height: 45,
         borderRadius: 22.5,
-        backgroundColor: Colors.sideBarIcon,
+        backgroundColor: colors.sideBarIcon,
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 10,
     },
     rightText: {
-        color: Colors.success,
+        color: colors.success,
         fontSize: fontsSize.smd,
         fontFamily: Fonts.senMedium,
         textDecorationLine: 'underline',
     },
 });
+
 

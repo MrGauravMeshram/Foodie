@@ -12,7 +12,8 @@ import {
     ReturnKeyTypeOptions,
 } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-import { Colors } from '../Theme/Color';
+import { useTheme } from '../Hooks/useTheme';
+import { useThemeStyles } from '../Hooks/useThemeStyles';
 
 type InputFieldProps = {
     label?: string;
@@ -53,10 +54,12 @@ const InputField = ({
     containerStyle,
     labelStyle,
     inputStyle,
-    placeholderTextColor = '#A0A5BA',
+    placeholderTextColor,
 }: InputFieldProps) => {
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const isPasswordType = secureTextEntry === true;
+    const { colors } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     return (
         <View style={[styles.container, containerStyle]}>
@@ -72,7 +75,7 @@ const InputField = ({
                     onSubmitEditing={onSubmitEditing}
                     blurOnSubmit={blurOnSubmit}
                     style={[styles.input, inputStyle]}
-                    placeholderTextColor={placeholderTextColor}
+                    placeholderTextColor={placeholderTextColor || colors.gray}
                     autoCorrect={false}
                     autoCapitalize="none"
                     autoComplete="off"
@@ -94,13 +97,13 @@ const InputField = ({
 
 export default InputField;
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     container: {
         width: '100%',
         marginBottom: 24,
     },
     label: {
-        color: '#32343E',
+        color: colors.black,
         fontSize: 14,
         fontFamily: 'Sen-Regular',
         textTransform: 'uppercase',
@@ -110,7 +113,7 @@ const styles = StyleSheet.create({
     inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: Colors.InputBox,
+        backgroundColor: colors.InputBox,
         height: 62,
         justifyContent:"center",
         borderRadius: 10,
@@ -121,7 +124,7 @@ const styles = StyleSheet.create({
         height: '100%',
         fontSize: 14,
         fontFamily: 'Sen-Regular',
-        color: Colors.black,
+        color: colors.black,
         padding: 0,
     },
     eyeButton: {
@@ -130,4 +133,5 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 });
+
 

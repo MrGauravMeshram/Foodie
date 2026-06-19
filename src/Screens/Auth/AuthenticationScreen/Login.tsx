@@ -1,19 +1,23 @@
 import { View, Text, Image, StatusBar, TouchableOpacity } from 'react-native'
-import { Styles } from '../../../Styles/AuthStyle'
+import { getStyles } from '../../../Styles/AuthStyle'
 import React, { useState } from 'react'
 import InputField from '../../../Components/InputField'
-import { Colors } from '../../../Theme/Color';
 import { Button } from '../../../Components/Button'
 import Social from '../OnBoardingScreen/Component/social'
+import { useTheme } from '../../../Hooks/useTheme'
+import { useThemeStyles } from '../../../Hooks/useThemeStyles'
 
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState("");
     const [checked, setChecked] = useState(false);
     const [password, setPassword] = useState("");
+    const { colors } = useTheme();
+    const Styles = useThemeStyles(getStyles);
+
     const socialIcon = [
         { icon: "facebook", backgroundColor: "#395998" },
         { icon: "twitter", backgroundColor: "#169CE8" },
-        { icon: "apple", backgroundColor: "black" }
+        { icon: "apple", backgroundColor: colors.black }
     ]
     return (
         <View style={Styles.container}>
@@ -53,14 +57,14 @@ const Login = ({ navigation }: any) => {
                                 height: 18,
                                 borderRadius: 4,
                                 borderWidth: 1,
-                                borderColor: checked ? Colors.btnColor : Colors.lightGrey,
-                                backgroundColor: checked ? Colors.btnColor : 'transparent',
+                                borderColor: checked ? colors.btnColor : colors.lightGrey,
+                                backgroundColor: checked ? colors.btnColor : 'transparent',
                                 justifyContent: 'center',
                                 alignItems: 'center',
                             }}
                         >
                             {checked ? (
-                                <Text style={{ color: Colors.white, fontSize: 12, fontWeight: '700' }}>✓</Text>
+                                <Text style={{ color: '#FFFFFF', fontSize: 12, fontWeight: '700' }}>✓</Text>
                             ) : null}
                         </TouchableOpacity>
                         <Text style={Styles.checkboxLabel}>Remember me</Text>
@@ -77,7 +81,7 @@ const Login = ({ navigation }: any) => {
                     <Text style={Styles.bottomText} onPress={() => { navigation.navigate("SignUp") }}>Sign Up</Text>
                 </View>
                 <View>
-                    <Text style={{ textAlign: "center", fontFamily: "Sen-Regular", fontSize: 18, color: Colors.lightGrey, marginTop: 25 }}>Or</Text>
+                    <Text style={{ textAlign: "center", fontFamily: "Sen-Regular", fontSize: 18, color: colors.lightGrey, marginTop: 25 }}>Or</Text>
                 </View>
                 <View style={{
                     flexDirection: "row",

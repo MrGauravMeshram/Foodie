@@ -2,18 +2,21 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import HomeScreen from '../Screens/Home/HomeScreen'
 import OfferScreen from '../Screens/Offer/Offer'
-import { Colors } from '../Theme/Color'
 import { Fonts } from '../Theme/fonts'
 import ProfileScreen from '../Screens/Profile/ProfileScreen'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useTabBar } from '../Utils/TabBarContext';
+import { useTheme } from '../Hooks/useTheme';
+import { useThemeStyles } from '../Hooks/useThemeStyles';
 
 const Tab = createBottomTabNavigator();
 
 const CustomTabBar = ({ state, descriptors, navigation }: any) => {
     const { tabBarTranslateY } = useTabBar();
+    const { colors } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     const animatedStyle = useAnimatedStyle(() => {
         return {
@@ -74,7 +77,7 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                     >
                         {IconComponent && IconComponent({
                             focused: isFocused,
-                            color: isFocused ? Colors.zomatoRed : Colors.zomatoInactive,
+                            color: isFocused ? colors.zomatoRed : colors.zomatoInactive,
                             size: 20
                         })}
                         {isFocused && (
@@ -124,14 +127,14 @@ const BottomNavigation = () => {
     )
 }
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     container: {
         position: 'absolute',
         bottom: 20,
         height: 60,
         width: 330,
         alignSelf: 'center',
-        backgroundColor: Colors.zomatoBg,
+        backgroundColor: colors.zomatoBg,
         borderRadius: 35,
         flexDirection: 'row',
         alignItems: 'center',
@@ -154,19 +157,19 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
     },
     tabButtonActive: {
-        backgroundColor: Colors.zomatoRedLight,
+        backgroundColor: colors.zomatoRedLight,
     },
     tabLabelActive: {
         fontSize: 13,
         fontFamily: Fonts.senBold,
         marginLeft: 6,
-        color: Colors.zomatoRed,
+        color: colors.zomatoRed,
     },
     tabLabelInactive: {
         fontSize: 13,
         fontFamily: Fonts.senRegular,
         marginLeft: 6,
-        color: Colors.zomatoInactive,
+        color: colors.zomatoInactive,
     },
 });
 

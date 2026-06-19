@@ -5,11 +5,12 @@ import Feather from 'react-native-vector-icons/Feather';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Animated, { SharedTransition } from 'react-native-reanimated';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import { Colors } from '../../Theme/Color';
 import { Fonts, fontsSize } from '../../Theme/fonts';
-import { style } from '../../Styles/RestaurantDetialsStyle';
+import { getStyle } from '../../Styles/RestaurantDetialsStyle';
 import { Spacing, Padding } from '../../Theme/Spacing';
 import { FoodData } from '../../Data/FoodData';
+import { useTheme } from '../../Hooks/useTheme';
+import { useThemeStyles } from '../../Hooks/useThemeStyles';
 
 const { width: screenWidth } = Dimensions.get('window');
 
@@ -18,7 +19,8 @@ const RestaurantDetials = () => {
   const route = useRoute<any>();
   const { restaurant } = route.params || {};
   const transition = SharedTransition.duration(550).springify();
-
+  const { colors } = useTheme();
+  const style = useThemeStyles(getStyle);
 
   const currentRestaurant = restaurant || {
     id: '1',
@@ -31,14 +33,12 @@ const RestaurantDetials = () => {
     location: 'Secunderabad',
   };
 
- 
   const subCategories = currentRestaurant.category
     ? currentRestaurant.category.split(' • ')
     : ['Burger', 'Pizza', 'Biryani'];
 
   const [selectedSubCategory, setSelectedSubCategory] = useState(subCategories[0]);
 
-  
   const foodList = FoodData[selectedSubCategory as keyof typeof FoodData] || FoodData.Burger || [];
 
   return (
@@ -60,50 +60,41 @@ const RestaurantDetials = () => {
             onPress={() => navigation.goBack()}
             activeOpacity={0.8}
           >
-            <Feather name="chevron-left" size={24} color={Colors.black} />
+            <Feather name="chevron-left" size={24} color={colors.BlackIcon} />
           </TouchableOpacity>
 
           <TouchableOpacity
             style={[style.circleButton, style.moreBtn]}
             activeOpacity={0.8}
           >
-            <Feather name="more-horizontal" size={24} color={Colors.black} />
+            <Feather name="more-horizontal" size={24} color={colors.BlackIcon} />
           </TouchableOpacity>
 
-         
           </View>
       
-
-     
         <View style={style.detailsWrapper}>
           <View style={style.infoRow}>
             <View style={style.infoItem}>
-              <Feather name="star" color={Colors.btnColor} size={20} />
+              <Feather name="star" color={colors.btnColor} size={20} />
               <Text style={style.infoText}>{currentRestaurant.rating}</Text>
             </View>
             <View style={style.infoItem}>
-              <Feather name="truck" color={Colors.btnColor} size={20} />
+              <Feather name="truck" color={colors.btnColor} size={20} />
               <Text style={style.infoText}>{currentRestaurant.deliveryFee || 'Free'}</Text>
             </View>
             <View style={style.infoItem}>
-              <Fontisto name="clock" color={Colors.btnColor} size={18} />
+              <Fontisto name="clock" color={colors.btnColor} size={18} />
               <Text style={style.infoText}>{currentRestaurant.deliveryTime}</Text>
             </View>
           </View>
 
-        
-          <Text
-            style={style.restaurantName}
-          >
-            {currentRestaurant.name}
-          </Text>
+          <Text style={style.restaurantName}>{currentRestaurant.name}</Text>
 
           <Text style={style.description}>
             Maecenas sed diam eget risus varius blandit sit amet non magna. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.
           </Text>
         </View>
 
-      
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -119,8 +110,8 @@ const RestaurantDetials = () => {
                 style={[
                   style.pill,
                   {
-                    backgroundColor: isSelected ? Colors.btnColor : Colors.white,
-                    borderColor: isSelected ? Colors.btnColor : '#E9E9E9',
+                    backgroundColor: isSelected ? colors.btnColor : colors.lightWhite,
+                    borderColor: isSelected ? colors.btnColor : (colors.lightWhite === '#1C1C1E' ? '#2C2C2E' : '#E9E9E9'),
                   },
                 ]}
               >
@@ -128,7 +119,7 @@ const RestaurantDetials = () => {
                   style={[
                     style.pillText,
                     {
-                      color: isSelected ? Colors.white : Colors.subtitleColor,
+                      color: isSelected ? '#FFFFFF' : colors.subtitleColor,
                       fontFamily: isSelected ? Fonts.senBold : Fonts.senRegular,
                     },
                   ]}
@@ -163,7 +154,7 @@ const RestaurantDetials = () => {
                 <View style={style.priceRow}>
                   <Text style={style.foodPrice}>${item.price}</Text>
                   <TouchableOpacity style={style.addButton} activeOpacity={0.8}>
-                    <Feather name="plus" size={16} color={Colors.white} />
+                    <Feather name="plus" size={16} color="#FFFFFF" />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -176,4 +167,5 @@ const RestaurantDetials = () => {
 };
 
 export default RestaurantDetials;
+
 

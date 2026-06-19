@@ -6,7 +6,8 @@ import {
     useWindowDimensions,
 } from 'react-native';
 import { SvgProps } from 'react-native-svg';
-import { Colors } from '../../../../Theme/Color';
+import { useTheme } from '../../../../Hooks/useTheme';
+import { useThemeStyles } from '../../../../Hooks/useThemeStyles';
 
 export type OnboardingItemType = {
     id: string;
@@ -22,6 +23,8 @@ type OnboardingItemProps = {
 export const OnboardingItem = ({ item }: OnboardingItemProps) => {
     const ImageComponent = item.image;
     const { width } = useWindowDimensions();
+    const { colors } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     return (
         <View style={[styles.container, { width }]}>
@@ -43,7 +46,7 @@ export const OnboardingItem = ({ item }: OnboardingItemProps) => {
     );
 };
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     container: {
         alignItems: 'center',
         justifyContent: 'center',
@@ -60,14 +63,14 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: 'Sen-Bold',
         textAlign: 'center',
-        color: '#32343E',
+        color: colors.black,
         marginBottom: 16,
     },
     description: {
         fontSize: 16,
         fontFamily: 'Sen-Regular',
         textAlign: 'center',
-        color: Colors.lightGrey,
+        color: colors.lightGrey,
         lineHeight: 24,
         paddingHorizontal: 16,
     },

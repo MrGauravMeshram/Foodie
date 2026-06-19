@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Colors } from '../../Theme/Color';
 import SearchHeader from './Components/SearchHeader';
 import SearchBar from '../../Components/SearchBar';
 import RecentKeywords from './Components/RecentKeywords';
@@ -13,9 +12,13 @@ import {
     PopularFastFoodData,
 } from '../../Data/SearchScreenData';
 import { Padding } from '../../Theme/Spacing';
+import { useTheme } from '../../Hooks/useTheme';
+import { useThemeStyles } from '../../Hooks/useThemeStyles';
 
 const SearchScreen = () => {
     const [searchText, setSearchText] = useState('');
+    const { colors } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     const handleKeywordPress = (word: string) => {
         setSearchText(word);
@@ -56,10 +59,10 @@ const SearchScreen = () => {
 
 export default SearchScreen;
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backgroundColor,
+        backgroundColor: colors.backgroundColor,
         paddingHorizontal:Padding.mPadding
     },
     scrollContent: {

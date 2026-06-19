@@ -1,10 +1,9 @@
 import { View, Text, Animated, LayoutChangeEvent } from 'react-native'
 import React, { useState, useEffect, useRef } from 'react'
-import { Style } from '../../Styles/HomeScreenStyle'
+import { getStyle } from '../../Styles/HomeScreenStyle'
 import SearchBar from '../../Components/SearchBar'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CategoriesData } from '../../Data/CategoriesData'
-import { Colors } from '../../Theme/Color';
 import ResaurantCardDetials from './Components/ResaurantCardDetials';
 import Pill from '../../Components/Pill';
 import { RestaurantData } from '../../Data/RestaurantData';
@@ -18,12 +17,17 @@ import FoodCardmenu from './Components/FoodCardmenu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Easing, withTiming, withSpring } from 'react-native-reanimated';
 import { useTabBar } from '../../Utils/TabBarContext';
+import { useTheme } from '../../Hooks/useTheme';
+import { useThemeStyles } from '../../Hooks/useThemeStyles';
 
 const HomeScreen = ({ route }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('1');
   const navigation = useNavigation<any>();
   const { city, state, address } = route.params || {};
+
+  const { colors, isDarkMode } = useTheme();
+  const Style = useThemeStyles(getStyle);
 
   const insets = useSafeAreaInsets();
   const topInset = insets.top;
@@ -132,7 +136,7 @@ const HomeScreen = ({ route }: any) => {
     : 0;
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.white }}>
+    <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
 
       <View
         style={{
@@ -141,7 +145,7 @@ const HomeScreen = ({ route }: any) => {
           left: 0,
           right: 0,
           height: topInset,
-          backgroundColor: Colors.white,
+          backgroundColor: colors.backgroundColor,
           zIndex: 11,
         }}
       />
@@ -185,7 +189,7 @@ const HomeScreen = ({ route }: any) => {
           style={{
             transform: [{ translateY: searchBarTranslateY }],
             zIndex: 10,
-            backgroundColor: Colors.white,
+            backgroundColor: colors.backgroundColor,
           }}
           onLayout={handleSearchBarLayout}
         >
@@ -204,7 +208,7 @@ const HomeScreen = ({ route }: any) => {
           <Text style={Style.CategoriesTitle}>All Categories</Text>
           <View style={Style.SeeAll}>
             <Text style={Style.CategoriesSubtitle}>See All</Text>
-            <MaterialIcons name="keyboard-arrow-right" color={Colors.lightGrey} size={26} />
+            <MaterialIcons name="keyboard-arrow-right" color={colors.lightGrey} size={26} />
           </View>
         </View>
 
@@ -212,7 +216,7 @@ const HomeScreen = ({ route }: any) => {
           style={{
             transform: [{ translateY: pillTranslateY }],
             zIndex: 9,
-            backgroundColor: Colors.white,
+            backgroundColor: colors.backgroundColor,
             paddingLeft: Padding.mPadding
           }}
           onLayout={handlePillLayout}
@@ -234,7 +238,7 @@ const HomeScreen = ({ route }: any) => {
           <Text style={Style.CategoriesTitle}>Open Restaurants</Text>
           <View style={Style.SeeAll}>
             <Text style={Style.CategoriesSubtitle}>See All</Text>
-            <MaterialIcons name="keyboard-arrow-right" color={Colors.lightGrey} size={26} />
+            <MaterialIcons name="keyboard-arrow-right" color={colors.lightGrey} size={26} />
           </View>
         </View>
 
@@ -247,4 +251,5 @@ const HomeScreen = ({ route }: any) => {
 }
 
 export default HomeScreen;
+
 

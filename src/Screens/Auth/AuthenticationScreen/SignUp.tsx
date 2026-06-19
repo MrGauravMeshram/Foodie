@@ -1,15 +1,19 @@
 import { View, Text, Image, StatusBar } from 'react-native';
-import { Styles } from '../../../Styles/AuthStyle'
+import { getStyles } from '../../../Styles/AuthStyle'
 import React, { useState } from 'react';
 import InputField from '../../../Components/InputField';
 import { Button } from '../../../Components/Button';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useTheme } from '../../../Hooks/useTheme'
+import { useThemeStyles } from '../../../Hooks/useThemeStyles'
 
 const SignUp = ({ navigation }: any) => {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [reTypePassword, setReTypePassword] = useState("");
+    const { colors } = useTheme();
+    const Styles = useThemeStyles(getStyles);
 
     const fields = [
         {
@@ -59,6 +63,7 @@ const SignUp = ({ navigation }: any) => {
   contentContainerStyle={{
     flexGrow: 1,
     paddingBottom: 30,
+    backgroundColor: colors.backgroundColorBlack,
   }}
 >
         <View style={Styles.container}>

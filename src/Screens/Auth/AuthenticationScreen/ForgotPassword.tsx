@@ -2,10 +2,15 @@ import { View, Text, StatusBar, Image } from 'react-native'
 import React, { useState } from 'react'
 import InputField from '../../../Components/InputField'
 import { Button } from '../../../Components/Button'
-import { Styles } from '../../../Styles/AuthStyle'
+import { getStyles } from '../../../Styles/AuthStyle'
+import { useTheme } from '../../../Hooks/useTheme'
+import { useThemeStyles } from '../../../Hooks/useThemeStyles'
 
 const ForgotPassword = ({ navigation }: any) => {
     const [email, setEmail] = useState("");
+    const { colors } = useTheme();
+    const Styles = useThemeStyles(getStyles);
+
     return (
         <View style={Styles.container}>
             <StatusBar

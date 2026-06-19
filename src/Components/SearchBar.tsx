@@ -1,9 +1,10 @@
 import { View, TextInput, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native'
 import React, { useState } from 'react'
-import { Colors } from '../Theme/Color';
 import { Spacing, Padding } from '../Theme/Spacing';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { useTheme } from '../Hooks/useTheme';
+import { useThemeStyles } from '../Hooks/useThemeStyles';
 
 type Props = {
   value?: string;
@@ -14,6 +15,8 @@ type Props = {
 
 const SearchBar = ({ value, onChangeText, placeholder, containerStyle }: Props) => {
   const [localText, setLocalText] = useState('');
+  const { colors } = useTheme();
+  const styles = useThemeStyles(getStyles);
 
   const isControlled = value !== undefined;
   const currentText = isControlled ? value : localText;
@@ -34,18 +37,18 @@ const SearchBar = ({ value, onChangeText, placeholder, containerStyle }: Props) 
   return (
     <View style={[styles.inputContainer, containerStyle]}>
       <View>
-        <Fontisto name="search" color="#7E8389" size={20} />
+        <Fontisto name="search" color={colors.lightGrey} size={20} />
       </View>
       <TextInput
         style={styles.input}
         value={currentText}
         onChangeText={handleTextChange}
         placeholder={placeholder || 'Search dishes, restaurant'}
-        placeholderTextColor={Colors.gray}
+        placeholderTextColor={colors.gray}
       />
       {currentText.length > 0 && (
         <TouchableOpacity onPress={handleClear} activeOpacity={0.7}>
-          <Ionicons name="close-circle" color="#A0A5AB" size={20} />
+          <Ionicons name="close-circle" color={colors.lightGrey} size={20} />
         </TouchableOpacity>
       )}
     </View>
@@ -54,11 +57,11 @@ const SearchBar = ({ value, onChangeText, placeholder, containerStyle }: Props) 
 
 export default SearchBar;
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: Colors.InputBox,
+    backgroundColor: colors.InputBox,
     height: 55,
     gap: 15,
     borderRadius: 10,
@@ -70,7 +73,7 @@ const styles = StyleSheet.create({
     height: '100%',
     fontSize: 16,
     fontFamily: 'Sen-Regular',
-    color: Colors.black,
+    color: colors.black,
     padding: 0,
   },
 })

@@ -1,11 +1,9 @@
 import { StyleSheet } from "react-native";
-import { Colors } from "../../../Theme/Color";
 
-
-export const styles = StyleSheet.create({
+export const getStyles = (colors: any) => StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: Colors.backgroundColor || '#FFFFFF',
+        backgroundColor: colors.backgroundColor || '#FFFFFF',
     },
     contentContainer: {
         flex: 1,
@@ -25,10 +23,10 @@ export const styles = StyleSheet.create({
         marginHorizontal: 6,
     },
     activeDot: {
-        backgroundColor: Colors.btnColor || '#FF7622',
+        backgroundColor: colors.btnColor || '#FF7622',
     },
     inactiveDot: {
-        backgroundColor: '#FFE1CC',
+        backgroundColor: colors.isDarkMode ? '#3A3F50' : '#FFE1CC',
     },
     buttonContainer: {
         paddingHorizontal: 24,
@@ -43,7 +41,7 @@ export const styles = StyleSheet.create({
     skipText: {
         fontSize: 16,
         fontFamily: 'Sen-Regular',
-        color: Colors.lightGrey || '#646982',
+        color: colors.lightGrey || '#646982',
     },
     skipPlaceholder: {
         height: 36,

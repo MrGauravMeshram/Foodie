@@ -3,7 +3,6 @@ import {
     View,
     Text,
     TouchableOpacity,
-
     StatusBar,
     Alert,
 } from 'react-native';
@@ -11,11 +10,14 @@ import { ONBOARDING_DATA } from '../../../Data/OnBoadingScreenData';
 import { OnboardingItem } from './Component/OnBoardingItem';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button } from '../../../Components/Button';
-import { Colors } from '../../../Theme/Color';
-import { styles } from './OnBoardingStyle';
+import { getStyles } from './OnBoardingStyle';
+import { useTheme } from '../../../Hooks/useTheme';
+import { useThemeStyles } from '../../../Hooks/useThemeStyles';
 
 const OnBoarding = ({ navigation }: any) => {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { colors, isDarkMode } = useTheme();
+    const styles = useThemeStyles(getStyles);
 
     const handleNext = () => {
         if (currentIndex < ONBOARDING_DATA.length - 1) {
@@ -34,7 +36,11 @@ const OnBoarding = ({ navigation }: any) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <StatusBar barStyle="dark-content" backgroundColor={Colors.backgroundColor || "#FFFFFF"} />
+            <StatusBar
+                barStyle={isDarkMode ? "light-content" : "dark-content"}
+                backgroundColor={colors.backgroundColor || "#FFFFFF"}
+            />
+
 
             <View style={styles.contentContainer}>
                 <OnboardingItem item={currentItem} />
@@ -77,4 +83,5 @@ const OnBoarding = ({ navigation }: any) => {
 };
 
 export default OnBoarding;
+
 

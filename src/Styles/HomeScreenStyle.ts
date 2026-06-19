@@ -1,19 +1,18 @@
 import { StyleSheet } from "react-native";
 import { Padding, Spacing } from "../Theme/Spacing";
-import { Colors } from "../Theme/Color";
 import { Fonts, fontsSize as Font, } from "../Theme/fonts";
 
-export const Style = StyleSheet.create({
+export const getStyle = (colors: any) => StyleSheet.create({
     Container: {
-
-        backgroundColor: Colors.white
+        backgroundColor: colors.backgroundColor
     },
     nameText: {
         fontFamily: Fonts.senSemiBold,
         fontSize: Font.md,
         paddingHorizontal: Padding.mPadding,
         marginTop: Spacing.md,
-        marginBottom: Spacing.md
+        marginBottom: Spacing.md,
+        color: colors.black
     },
     search: {
         paddingHorizontal: Padding.lPadding
@@ -30,13 +29,12 @@ export const Style = StyleSheet.create({
         alignItems: "center",
     },
     CategoriesTitle: {
-        color: Colors.subtitleColor,
+        color: colors.semiBlack,
         fontFamily: Fonts.senSemiBold,
-
         fontSize: Font.smd
     },
     CategoriesSubtitle: {
-        color: Colors.gray,
+        color: colors.gray,
         fontFamily: Fonts.senMedium,
         fontSize: Font.md,
     }

@@ -1,12 +1,12 @@
 import { View, Text, StyleSheet, Image, FlatList, TouchableOpacity } from 'react-native'
 import React from 'react'
-import { Colors } from '../Theme/Color'
 import { Padding, Spacing } from '../Theme/Spacing'
 import { Fonts, fontsSize } from '../Theme/fonts'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
 import { setSelectedCategory } from '../State/PopularSlice';
-
+import { useTheme } from '../Hooks/useTheme';
+import { useThemeStyles } from '../Hooks/useThemeStyles';
 
 type props = {
   Data: any,
@@ -17,6 +17,8 @@ type props = {
 const Pill = ({ Data, active, onSelect }: props) => {
   const navigation = useNavigation<any>();
   const dispatch = useDispatch();
+  const { colors } = useTheme();
+  const styles = useThemeStyles(getStyles);
 
   const onPressSelect = (item: any) => {
     onSelect(item.id)
@@ -31,21 +33,21 @@ const Pill = ({ Data, active, onSelect }: props) => {
         activeOpacity={0.8}
         onPress={() => onPressSelect(item)}
         style={[
-          Style.container,
+          styles.container,
           {
             backgroundColor: isSelected
               ? '#FFD27A'
-              : '#F5F5F5',
+              : colors.lightWhite,
           },
         ]}>
-        <View style={Style.imagecontain}>
+        <View style={styles.imagecontain}>
           <Image
             source={{ uri: item.image }}
             style={{ height: "100%", width: "100%", borderRadius: 50 }}
             resizeMode='cover' />
         </View>
         <View>
-          <Text style={Style.text}>{item.title}</Text>
+          <Text style={[styles.text, { color: isSelected ? '#000000' : colors.black }]}>{item.title}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -56,7 +58,7 @@ const Pill = ({ Data, active, onSelect }: props) => {
       renderItem={renderPill}
       horizontal
       keyExtractor={(item) => item.id.toString()}
-      contentContainerStyle={Style.box}
+      contentContainerStyle={styles.box}
       nestedScrollEnabled
     />
   )
@@ -64,7 +66,7 @@ const Pill = ({ Data, active, onSelect }: props) => {
 
 export default Pill
 
-const Style = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
   imagecontain: {
     height: 50,
     width: 50,
@@ -80,12 +82,6 @@ const Style = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: Spacing.md,
     flexDirection: "row",
-    backgroundColor: "#1A1A1A",
-
-
-
-
-
   },
   text: {
     fontFamily: Fonts.senRegular,
@@ -96,3 +92,4 @@ const Style = StyleSheet.create({
     gap: 25,
   }
 })
+

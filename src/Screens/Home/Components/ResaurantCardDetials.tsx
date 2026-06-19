@@ -3,46 +3,49 @@ import RestaurantCard from '../../../Components/RestaurantCard'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import { Fonts, fontsSize } from '../../../Theme/fonts'
 import { Padding } from '../../../Theme/Spacing'
-import { Colors } from '../../../Theme/Color'
 import React from 'react'
 import Feather from 'react-native-vector-icons/Feather';
 import { useNavigation } from '@react-navigation/native';
 import Animated, { SharedTransition } from 'react-native-reanimated';
+import { useTheme } from '../../../Hooks/useTheme';
+import { useThemeStyles } from '../../../Hooks/useThemeStyles';
 
 const ResaurantCardDetials = ({ Data }: any) => {
   const navigation = useNavigation<any>();
   const transition = SharedTransition.duration(550).springify();
+  const { colors } = useTheme();
+  const styles = useThemeStyles(getStyles);
 
   const renderCard = ({ item }: any) => {
     return (
       <TouchableOpacity
         activeOpacity={0.9}
         onPress={() => navigation.navigate('RestaurantDetials', { restaurant: item })}
-        style={Style.container}
+        style={styles.container}
       >
         <View>
           <RestaurantCard image={item.image} id={item.id} />
         </View>
         <View>
           <Text
-            style={Style.title}
+            style={styles.title}
           >
             {item.name}
           </Text>
-          <Text style={Style.subtitle}>{item.category}</Text>
+          <Text style={styles.subtitle}>{item.category}</Text>
         </View>
-        <View style={Style.rate}>
-          <View style={Style.icon}>
-            <Feather name="star" color={Colors.btnColor} size={24} />
-            <Text>{item.rating}</Text>
+        <View style={styles.rate}>
+          <View style={styles.icon}>
+            <Feather name="star" color={colors.btnColor} size={24} />
+            <Text style={styles.rateText}>{item.rating}</Text>
           </View>
-          <View style={Style.icon}>
-            <Feather name="truck" color={Colors.btnColor} size={24} />
-            <Text>Free</Text>
+          <View style={styles.icon}>
+            <Feather name="truck" color={colors.btnColor} size={24} />
+            <Text style={styles.rateText}>Free</Text>
           </View>
-          <View style={Style.icon}>
-            <Fontisto name="clock" color={Colors.btnColor} size={24} />
-            <Text>{item.deliveryTime}</Text>
+          <View style={styles.icon}>
+            <Fontisto name="clock" color={colors.btnColor} size={24} />
+            <Text style={styles.rateText}>{item.deliveryTime}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -55,27 +58,25 @@ const ResaurantCardDetials = ({ Data }: any) => {
       renderItem={renderCard}
       keyExtractor={(item) => item.id}
       scrollEnabled={false}
-
     />
   )
-
 }
 
 export default ResaurantCardDetials
 
-const Style = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
   container: {
     paddingVertical: Padding.sPadding
   },
   title: {
     fontFamily: Fonts.senBold,
-    color: Colors.black,
+    color: colors.black,
     paddingTop: Padding.sPadding,
     fontSize: fontsSize.large
   },
   subtitle: {
     fontFamily: Fonts.senRegular,
-    color: Colors.lightGrey
+    color: colors.lightGrey
   },
   rate: {
     marginTop: 10,
@@ -84,5 +85,10 @@ const Style = StyleSheet.create({
   },
   icon: {
     flexDirection: "row", gap: 10, alignItems: "center"
+  },
+  rateText: {
+    fontFamily: Fonts.senRegular,
+    color: colors.black,
+    fontSize: fontsSize.md,
   }
 })

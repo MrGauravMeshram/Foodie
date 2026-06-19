@@ -3,11 +3,9 @@ import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback } fr
 import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import LeftArrow from '../../../Components/LeftArrow';
-import { Colors } from '../../../Theme/Color';
-import { styles } from '../../../Styles/SearchBarHeaderStyle';
-
-
-
+import { getStyles } from '../../../Styles/SearchBarHeaderStyle';
+import { useTheme } from '../../../Hooks/useTheme';
+import { useThemeStyles } from '../../../Hooks/useThemeStyles';
 
 const SearchHeader = ({
   icon,
@@ -23,19 +21,30 @@ const SearchHeader = ({
 }: any) => {
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
+  const { colors, isDarkMode } = useTheme();
+  const styles = useThemeStyles(getStyles);
 
   const hasData = data && data.length > 0;
 
+  // If a fixed dark background header is requested, determine correct backgrounds/foregrounds.
+  // E.g., for CartScreen, light mode shows a dark header (color=true).
+  // In dark mode, all headers should match the dark background.
+  const isHeaderDark = color || isDarkMode;
+  const headerBgColor = isHeaderDark ? colors.backgroundColorBlack : colors.backgroundColor;
+  const textTitleColor = isHeaderDark ? colors.white : colors.semiBlack;
+  const backBtnBg = isHeaderDark ? colors.semiBlack : colors.sideBarIcon;
+  const backArrowColor = isHeaderDark ? colors.white : colors.BlackIcon;
+
   return (
-    <View style={[styles.container,{backgroundColor:color?Colors.backgroundColorBlack:Colors.backgroundColor}]}>
+    <View style={[styles.container, { backgroundColor: headerBgColor }]}>
       <View style={styles.leftSection}>
         <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.8}>
           <LeftArrow 
             containerStyle={[
               styles.backButton,
-              color && { backgroundColor: Colors.semiBlack }
+              { backgroundColor: backBtnBg }
             ]}
-            arrowColor={color ? Colors.white : Colors.BlackIcon}
+            arrowColor={backArrowColor}
           />
         </TouchableOpacity>
 
@@ -46,13 +55,13 @@ const SearchHeader = ({
               onPress={() => setOpen(!open)}
               activeOpacity={0.8}
             >
-              <Text style={[styles.pillText,{color:color?"#FFF":Colors.semiBlack}]}>
+              <Text style={[styles.pillText, { color: textTitleColor }]}>
                 {String(selectedValue || title).toUpperCase()}
               </Text>
               <Feather
                 name={open ? 'chevron-up' : 'chevron-down'}
                 size={14}
-                color={Colors.btnColor}
+                color={colors.btnColor}
                 style={styles.pillChevron}
               />
             </TouchableOpacity>
@@ -92,14 +101,14 @@ const SearchHeader = ({
             )}
           </View>
         ) : (
-          <Text style={[styles.title,{color:color?Colors.white:Colors.semiBlack}]}>{title}</Text>
+          <Text style={[styles.title, { color: textTitleColor }]}>{title}</Text>
         )}
       </View>
 
       <View style={styles.rightSection}>
         {icon && (
           <TouchableOpacity style={styles.cartContainer} activeOpacity={0.8}>
-            <Feather name={icon} color={Colors.whiteIcon} size={22} />
+            <Feather name={icon} color={colors.whiteIcon} size={22} />
           </TouchableOpacity>
         )}
 
@@ -109,7 +118,7 @@ const SearchHeader = ({
             activeOpacity={0.8}
             onPress={onFilterPress}
           >
-            <Feather name="sliders" color={Colors.semiBlack} size={20} />
+            <Feather name="sliders" color={colors.semiBlack} size={20} />
           </TouchableOpacity>
         )}
 
@@ -127,3 +136,4 @@ const SearchHeader = ({
 };
 
 export default SearchHeader;
+

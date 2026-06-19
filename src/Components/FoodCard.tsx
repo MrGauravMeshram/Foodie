@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated'
-import { Colors } from '../Theme/Color'
 import { Fonts, fontsSize } from '../Theme/fonts'
+import { useTheme } from '../Hooks/useTheme';
+import { useThemeStyles } from '../Hooks/useThemeStyles';
 
 type FoodCardProps = {
   image: any;
@@ -18,6 +19,8 @@ const FoodCard = ({
   price,
 }: FoodCardProps) => {
   const [quantity, setQuantity] = useState(0);
+  const { colors } = useTheme();
+  const styles = useThemeStyles(getStyles);
 
   const animatedWidth = useSharedValue(34);
 
@@ -87,16 +90,15 @@ const FoodCard = ({
 
 export default FoodCard
 
-const styles = StyleSheet.create({
+const getStyles = (colors: any) => StyleSheet.create({
   card: {
     width: 180,
     alignSelf: "center",
-    backgroundColor: Colors.white,
+    backgroundColor: colors.lightWhite,
     borderRadius: 24,
     padding: 12,
     margin: 10,
-
-    shadowColor: '#000',
+    shadowColor: colors.black,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -104,6 +106,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 8,
     elevation: 4,
+    borderWidth: 1,
+    borderColor: colors.lightWhite === '#1C1C1E' ? '#2C2C2E' : 'transparent',
   },
 
   image: {
@@ -115,14 +119,14 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: Fonts.senBold,
     fontSize: fontsSize.md,
-    color: Colors.semiBlack,
+    color: colors.semiBlack,
     marginTop: 8,
   },
 
   subtitle: {
     fontFamily: Fonts.senRegular,
     fontSize: fontsSize.sm,
-    color: Colors.lightGrey,
+    color: colors.lightGrey,
     marginTop: 4,
   },
 
@@ -136,12 +140,12 @@ const styles = StyleSheet.create({
   price: {
     fontFamily: Fonts.senBold,
     fontSize: fontsSize.smd,
-    color: Colors.semiBlack,
+    color: colors.semiBlack,
   },
 
   counterContainer: {
     height: 34,
-    backgroundColor: Colors.btnColor,
+    backgroundColor: colors.btnColor,
     borderRadius: 17,
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -158,7 +162,7 @@ const styles = StyleSheet.create({
   },
 
   counterButtonText: {
-    color: Colors.white,
+    color: '#FFFFFF',
     fontFamily: Fonts.senBold,
     fontSize: 18,
     textAlign: 'center',
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
   },
 
   quantityText: {
-    color: Colors.white,
+    color: '#FFFFFF',
     fontFamily: Fonts.senBold,
     fontSize: 16,
     textAlign: 'center',
@@ -187,10 +191,11 @@ const styles = StyleSheet.create({
   },
 
   plusButtonText: {
-    color: Colors.white,
+    color: '#FFFFFF',
     fontFamily: Fonts.senBold,
     fontSize: 18,
     textAlign: 'center',
     lineHeight: Platform.OS === 'ios' ? 18 : 22,
   },
 });
+
