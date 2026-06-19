@@ -1,6 +1,6 @@
 import { View, Text, Animated, LayoutChangeEvent } from 'react-native'
-import React ,{useState,useEffect,useRef}from 'react'
-import {Style} from '../../Styles/HomeScreenStyle'
+import React, { useState, useEffect, useRef } from 'react'
+import { Style } from '../../Styles/HomeScreenStyle'
 import SearchBar from '../../Components/SearchBar'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CategoriesData } from '../../Data/CategoriesData'
@@ -8,15 +8,18 @@ import { Colors } from '../../Theme/Color';
 import ResaurantCardDetials from './Components/ResaurantCardDetials';
 import Pill from '../../Components/Pill';
 import { RestaurantData } from '../../Data/RestaurantData';
+import { Padding } from '../../Theme/Spacing'
 import CouponModal from './Components/CoupenModal';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableOpacity } from 'react-native';
 import HomeScreenHeader from './Components/HomeScreenHeader';
-import {FoodCardData} from '../../Data/FoodCardData'
+import { FoodCardData } from '../../Data/FoodCardData'
 import FoodCardmenu from './Components/FoodCardmenu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Easing, withTiming, withSpring } from 'react-native-reanimated';
+import { useTabBar } from '../../Utils/TabBarContext';
 
-const HomeScreen = ({route}:any) => {
+const HomeScreen = ({ route }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('1');
   const navigation = useNavigation<any>();
@@ -26,6 +29,11 @@ const HomeScreen = ({route}:any) => {
   const topInset = insets.top;
 
   const scrollY = useRef(new Animated.Value(0)).current;
+  const { tabBarTranslateY } = useTabBar();
+  const lastScrollY = useRef(0);
+  const tabBarState = useRef(0);
+  const layoutHeight = useRef(0);
+  const contentHeight = useRef(0);
 
   const [searchBarY, setSearchBarY] = useState(0);
   const [searchBarHeight, setSearchBarHeight] = useState(0);
@@ -42,30 +50,77 @@ const HomeScreen = ({route}:any) => {
     setPillY(y);
   };
 
-  console.log(city);
-  console.log(state);
-  console.log(address);
+  const timingConfig = useRef({
+    duration: 350,
+    easing: Easing.bezier(0.25, 1, 0.5, 1),
+  }).current;
+
+  const handleScroll = (value: number) => {
+    const diff = value - lastScrollY.current;
+    lastScrollY.current = value;
+
+    const limit = searchBarY - topInset;
+
+
+    if (value < limit) {
+      if (tabBarState.current !== 0) {
+        tabBarState.current = 0;
+        tabBarTranslateY.value = withTiming(0, timingConfig);
+      }
+      return;
+    }
+
+
+    if (layoutHeight.current > 0 && contentHeight.current > 0 && (value + layoutHeight.current >= contentHeight.current - 50)) {
+      if (tabBarState.current !== 0) {
+        tabBarState.current = 0;
+        tabBarTranslateY.value = withTiming(0, timingConfig);
+      }
+      return;
+    }
+
+
+    if (diff > 0.05) {
+      if (tabBarState.current !== 150) {
+        tabBarState.current = 150;
+        tabBarTranslateY.value = withTiming(150, timingConfig);
+      }
+    } else if (diff < -0.05) {
+      if (tabBarState.current !== 0) {
+        tabBarState.current = 0;
+        tabBarTranslateY.value = withTiming(0, timingConfig);
+      }
+    }
+  };
 
   useEffect(() => {
     setShowModal(true);
-  }, []);
+
+    const listenerId = scrollY.addListener(({ value }) => {
+      handleScroll(value);
+    });
+
+    return () => {
+      scrollY.removeListener(listenerId);
+    };
+  }, [searchBarY, topInset]);
 
   const searchBarLimit = searchBarY - topInset;
   const searchBarTranslateY = (searchBarY > 0 && searchBarLimit > 0)
     ? scrollY.interpolate({
-        inputRange: [0, searchBarLimit, searchBarLimit + 1],
-        outputRange: [0, 0, 1],
-        extrapolateLeft: 'clamp',
-      })
+      inputRange: [0, searchBarLimit, searchBarLimit + 1],
+      outputRange: [0, 0, 1],
+      extrapolateLeft: 'clamp',
+    })
     : 0;
 
   const pillLimit = pillY - (searchBarHeight + topInset);
   const pillTranslateY = (pillY > 0 && searchBarHeight > 0 && pillLimit > 0)
     ? scrollY.interpolate({
-        inputRange: [0, pillLimit, pillLimit + 1],
-        outputRange: [0, 0, 1],
-        extrapolateLeft: 'clamp',
-      })
+      inputRange: [0, pillLimit, pillLimit + 1],
+      outputRange: [0, 0, 1],
+      extrapolateLeft: 'clamp',
+    })
     : 0;
 
   return (
@@ -85,12 +140,24 @@ const HomeScreen = ({route}:any) => {
 
       <Animated.ScrollView
         style={Style.Container}
-        overScrollMode='never'
+        contentContainerStyle={{ paddingBottom: 100 }}
         scrollEventThrottle={16}
         onScroll={Animated.event(
           [{ nativeEvent: { contentOffset: { y: scrollY } } }],
           { useNativeDriver: true }
         )}
+        onScrollEndDrag={(event) => {
+          handleScroll(event.nativeEvent.contentOffset.y);
+        }}
+        onMomentumScrollEnd={(event) => {
+          handleScroll(event.nativeEvent.contentOffset.y);
+        }}
+        onLayout={(event) => {
+          layoutHeight.current = event.nativeEvent.layout.height;
+        }}
+        onContentSizeChange={(width, height) => {
+          contentHeight.current = height;
+        }}
       >
         <View>
           <HomeScreenHeader address={address} />
@@ -133,19 +200,20 @@ const HomeScreen = ({route}:any) => {
             transform: [{ translateY: pillTranslateY }],
             zIndex: 9,
             backgroundColor: Colors.white,
+            paddingLeft: Padding.mPadding
           }}
           onLayout={handlePillLayout}
         >
-          
-            <Pill
-              Data={CategoriesData}
-              active={selectedCategory}
-              onSelect={setSelectedCategory}
-            />
-        
+
+          <Pill
+            Data={CategoriesData}
+            active={selectedCategory}
+            onSelect={setSelectedCategory}
+          />
+
         </Animated.View>
 
-        <View style={{ marginTop: 15 }}>
+        <View style={{ marginTop: 15, paddingLeft: Padding.mPadding }}>
           <FoodCardmenu Data={FoodCardData} />
         </View>
 
@@ -157,7 +225,7 @@ const HomeScreen = ({route}:any) => {
           </View>
         </View>
 
-        <View>
+        <View style={{ paddingHorizontal: Padding.mPadding }}>
           <ResaurantCardDetials Data={RestaurantData} />
         </View>
       </Animated.ScrollView>

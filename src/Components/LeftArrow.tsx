@@ -4,13 +4,14 @@ import { Colors } from '../Theme/Color'
 import Fontisto from 'react-native-vector-icons/Fontisto';
 
 type Props = {
-    containerStyle?: ViewStyle;
+    containerStyle?: any;
+    arrowColor?: string;
 };
 
-const LeftArrow = ({ containerStyle }: Props) => {
+const LeftArrow = ({ containerStyle, arrowColor = "#000" }: Props) => {
     return (
         <View style={[style.container, containerStyle]}>
-            <Fontisto name="angle-left" color="#000" size={16} />
+            <Fontisto name="angle-left" color={arrowColor} size={16} />
         </View>
     )
 }

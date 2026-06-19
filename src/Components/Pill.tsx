@@ -35,7 +35,7 @@ const Pill = ({ Data, active, onSelect }: props) => {
           {
             backgroundColor: isSelected
               ? '#FFD27A'
-              : Colors.white,
+              : '#F5F5F5',
           },
         ]}>
         <View style={Style.imagecontain}>
@@ -80,10 +80,11 @@ const Style = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop: Spacing.md,
     flexDirection: "row",
-    borderWidth: 1,
-    elevation: 1,
-    borderColor: Colors.white,
-    backgroundColor: Colors.white
+    backgroundColor: "#1A1A1A",
+
+
+
+
 
   },
   text: {

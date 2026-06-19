@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Dimensions, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Feather from 'react-native-vector-icons/Feather';
 import LeftArrow from '../../../Components/LeftArrow';
 import { Colors } from '../../../Theme/Color';
-import { Fonts, fontsSize } from '../../../Theme/fonts';
-import { Spacing } from '../../../Theme/Spacing';
 import { styles } from '../../../Styles/SearchBarHeaderStyle';
+
 
 
 
@@ -18,6 +17,9 @@ const SearchHeader = ({
   onSelect,
   showFilter = false,
   onFilterPress,
+  color,
+  rightText,
+  onRightPress,
 }: any) => {
   const navigation = useNavigation();
   const [open, setOpen] = useState(false);
@@ -25,10 +27,16 @@ const SearchHeader = ({
   const hasData = data && data.length > 0;
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,{backgroundColor:color?Colors.backgroundColorBlack:Colors.backgroundColor}]}>
       <View style={styles.leftSection}>
         <TouchableOpacity onPress={() => navigation.goBack()} activeOpacity={0.8}>
-          <LeftArrow containerStyle={styles.backButton} />
+          <LeftArrow 
+            containerStyle={[
+              styles.backButton,
+              color && { backgroundColor: Colors.semiBlack }
+            ]}
+            arrowColor={color ? Colors.white : Colors.BlackIcon}
+          />
         </TouchableOpacity>
 
         {hasData ? (
@@ -38,7 +46,7 @@ const SearchHeader = ({
               onPress={() => setOpen(!open)}
               activeOpacity={0.8}
             >
-              <Text style={styles.pillText}>
+              <Text style={[styles.pillText,{color:color?"#FFF":Colors.semiBlack}]}>
                 {String(selectedValue || title).toUpperCase()}
               </Text>
               <Feather
@@ -84,7 +92,7 @@ const SearchHeader = ({
             )}
           </View>
         ) : (
-          <Text style={styles.title}>{title}</Text>
+          <Text style={[styles.title,{color:color?Colors.white:Colors.semiBlack}]}>{title}</Text>
         )}
       </View>
 
@@ -102,6 +110,15 @@ const SearchHeader = ({
             onPress={onFilterPress}
           >
             <Feather name="sliders" color={Colors.semiBlack} size={20} />
+          </TouchableOpacity>
+        )}
+
+        {rightText && (
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={onRightPress}
+          >
+            <Text style={styles.rightText}>{rightText}</Text>
           </TouchableOpacity>
         )}
       </View>

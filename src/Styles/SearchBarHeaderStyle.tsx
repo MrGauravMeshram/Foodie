@@ -1,7 +1,6 @@
 import { StyleSheet } from "react-native"
 import { Colors } from "../Theme/Color"
 import { Fonts, fontsSize } from "../Theme/fonts"
-import { Spacing } from "../Theme/Spacing"
 import { Dimensions } from "react-native"
 const { width: screenWidth, height: screenHeight } = Dimensions.get('window');
 
@@ -118,6 +117,12 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginLeft: 10,
+    },
+    rightText: {
+        color: Colors.success,
+        fontSize: fontsSize.smd,
+        fontFamily: Fonts.senMedium,
+        textDecorationLine: 'underline',
     },
 });
 

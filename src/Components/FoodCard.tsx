@@ -25,7 +25,8 @@ const FoodCard = ({
       <View style={styles.footer}>
         <Text style={styles.price}>${price}</Text>
 
-        <TouchableOpacity style={styles.addButton}>
+        <TouchableOpacity style={styles.addButton}
+        >
           <Text style={styles.plus}>+</Text>
         </TouchableOpacity>
       </View>

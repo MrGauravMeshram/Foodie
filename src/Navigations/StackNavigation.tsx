@@ -15,6 +15,7 @@ import HomeScreenHeader from "../Screens/Home/Components/HomeScreenHeader";
 import SearchScreen from "../Screens/Home/SearchScreen";
 import RestaurantDetials from "../Screens/ResaurantDetialsScreen/RestaurantDetials";
 import PopularItemScreen from "../Screens/Home/PopularItemScreen";
+import CartScreen from "../Screens/Cart/CartScreen";
 import BottomNavigation from "./BottomNavigation";
 import React from 'react'
 
@@ -69,6 +70,7 @@ const StackNavigation = () => {
                 <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="RestaurantDetials" component={RestaurantDetials} options={{ headerShown: false, animation: 'fade', }} />
+                <Stack.Screen name= "CartScreen" component={CartScreen} options={{headerShown:false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )

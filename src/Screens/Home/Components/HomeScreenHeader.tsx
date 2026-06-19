@@ -1,12 +1,14 @@
-import { View, Text ,StyleSheet,StatusBar} from 'react-native'
+import { View, Text ,StyleSheet,StatusBar,TouchableOpacity} from 'react-native'
 import React from 'react'
 import Foundation from 'react-native-vector-icons/Foundation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
 import { Padding, Spacing } from '../../../Theme/Spacing';
 import { Fonts,fontsSize as Font } from '../../../Theme/fonts';
+import { useNavigation } from '@react-navigation/native';
 import { Colors } from '../../../Theme/Color';
 const HomeScreenHeader = ({address}:any) => {
+  const navigation = useNavigation<any>()
   return (
     <SafeAreaView style={style.HeaderContainer}>
         <StatusBar barStyle={'dark-content'}/>
@@ -19,9 +21,9 @@ const HomeScreenHeader = ({address}:any) => {
       <Text style={style.locationSubtile} numberOfLines={1} ellipsizeMode="tail">{address || 'Select Location'}</Text>
       </View>
       </View>
-      <View style={[style.sidebar,{backgroundColor:Colors.semiBlack}]}>
+      <TouchableOpacity style={[style.sidebar,{backgroundColor:Colors.semiBlack}]} onPress={()=>navigation.navigate('CartScreen')}>
           <Feather name="shopping-bag" color="#FFF" size={24} />
-      </View>
+      </TouchableOpacity>
     </SafeAreaView>
   )
 }

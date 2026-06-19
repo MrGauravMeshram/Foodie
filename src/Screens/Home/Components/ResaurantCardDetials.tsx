@@ -65,7 +65,7 @@ export default ResaurantCardDetials
 
 const Style = StyleSheet.create({
   container: {
-    paddingVertical: Padding.mPadding
+    paddingVertical: Padding.sPadding
   },
   title: {
     fontFamily: Fonts.senBold,
