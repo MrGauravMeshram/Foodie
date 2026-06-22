@@ -4,8 +4,12 @@ import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from '
 import { Fonts, fontsSize } from '../Theme/fonts'
 import { useTheme } from '../Hooks/useTheme';
 import { useThemeStyles } from '../Hooks/useThemeStyles';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart, removeFromCart } from '../State/CartSlice';
+import { RootState } from '../State/store';
 
 type FoodCardProps = {
+  id: string;
   image: any;
   title: string;
   restaurant: string;
@@ -13,16 +17,18 @@ type FoodCardProps = {
 };
 
 const FoodCard = ({
+  id,
   image,
   title,
   restaurant,
   price,
 }: FoodCardProps) => {
-  const [quantity, setQuantity] = useState(0);
   const { colors } = useTheme();
   const styles = useThemeStyles(getStyles);
 
+  const quantity = useSelector((state: RootState) => state.cart.items.find(item => item.id === id)?.quantity || 0);
   const animatedWidth = useSharedValue(34);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (quantity > 0) {
@@ -39,14 +45,13 @@ const FoodCard = ({
   });
 
   const handleIncrease = () => {
-    setQuantity(prev => prev + 1);
+    dispatch(addToCart({ id, title, restaurant, price, image }));
   };
 
   const handleDecrease = () => {
-    if (quantity > 0) {
-      setQuantity(prev => prev - 1);
-    }
+    dispatch(removeFromCart(id));
   };
+  
 
   return (
     <View style={styles.card}>
@@ -60,7 +65,7 @@ const FoodCard = ({
         <Text style={styles.price}>${price}</Text>
 
         <Animated.View style={[styles.counterContainer, containerStyle]}>
-          {/* Minus button */}
+          
           <TouchableOpacity 
             style={styles.counterButton} 
             onPress={handleDecrease}
@@ -69,12 +74,12 @@ const FoodCard = ({
             <Text style={styles.counterButtonText}>-</Text>
           </TouchableOpacity>
 
-          {/* Quantity text */}
+      
           <View style={styles.quantityWrapper}>
             <Text style={styles.quantityText}>{quantity}</Text>
           </View>
 
-          {/* Plus button */}
+        
           <TouchableOpacity 
             style={styles.plusButton} 
             onPress={handleIncrease}

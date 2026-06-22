@@ -42,6 +42,7 @@ const PopularItemScreen = () => {
           data={FoodData[selectedCategory as keyof typeof FoodData] || []}
           renderItem={({ item }) => (
             <FoodCard
+              id={item.id}
               image={item.image}
               title={item.name}
               restaurant={item.restaurant}

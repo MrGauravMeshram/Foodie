@@ -1,5 +1,5 @@
 import { View, Text ,StyleSheet,StatusBar,TouchableOpacity} from 'react-native'
-import React from 'react'
+import React ,{useRef}from 'react'
 import Foundation from 'react-native-vector-icons/Foundation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
@@ -9,12 +9,37 @@ import { Fonts,fontsSize as Font } from '../../../Theme/fonts';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../../Hooks/useTheme';
 import { useThemeStyles } from '../../../Hooks/useThemeStyles';
+import switchTheme from 'react-native-theme-switch-animation';
+
 
 const HomeScreenHeader = ({address}:any) => {
+  const buttonRef = useRef<any>(null);
   const navigation = useNavigation<any>()
   const { isDarkMode, toggleTheme, colors } = useTheme();
   const styles = useThemeStyles(getStyles);
 
+  const handleThemeToggle = () => {
+    if (buttonRef.current) {
+      buttonRef.current.measure((_x: number, _y: number, width: number, height: number, px: number, py: number) => {
+        switchTheme({
+          switchThemeFunction: () => {
+            toggleTheme();
+          },
+          animationConfig: {
+            type: 'circular',
+            duration: 800,
+            startingPoint: {
+              cx: px + width / 2,
+              cy: py + height / 2,
+            },
+          },
+        });
+      });
+    } else {
+      toggleTheme();
+    }
+  };
+  
   return (
     <SafeAreaView style={styles.HeaderContainer}>
         <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} backgroundColor={colors.backgroundColor}/>
@@ -28,7 +53,12 @@ const HomeScreenHeader = ({address}:any) => {
           </View>
         </View>
         <View style={{flexDirection:"row",alignItems:"center",gap:10}}>
-          <TouchableOpacity style={styles.sidebar} onPress={toggleTheme} activeOpacity={0.8}>
+          <TouchableOpacity
+            ref={buttonRef}
+            style={styles.sidebar}
+            onPress={handleThemeToggle}
+            activeOpacity={0.8}
+          >
             <Ionicons name={isDarkMode ? "sunny" : "moon"} color={colors.BlackIcon} size={22} />
           </TouchableOpacity>
           <TouchableOpacity style={[styles.sidebar,{backgroundColor:colors.semiBlack}]} onPress={()=>navigation.navigate('CartScreen')} activeOpacity={0.8}>

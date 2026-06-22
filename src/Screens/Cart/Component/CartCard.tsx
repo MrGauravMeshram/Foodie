@@ -1,40 +1,70 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { useDispatch } from 'react-redux'
+import Entypo from 'react-native-vector-icons/Entypo'
 import { Colors } from '../../../Theme/Color'
-import { Padding } from '../../../Theme/Spacing'
 import { fontsSize, Fonts } from '../../../Theme/fonts'
-import Entypo from 'react-native-vector-icons/Entypo';
+import { addToCart, removeFromCart, removeItem } from '../../../State/CartSlice'
 
-const CartCard = () => {
+type CartCardProps = {
+    id: string;
+    title: string;
+    price: number;
+    image: string;
+    quantity: number;
+}
+
+const CartCard = ({ id, title, price, image, quantity }: CartCardProps) => {
+    const dispatch = useDispatch()
+    const itemTotal = (Number(price) || 0) * (Number(quantity) || 0)
+
+    const handleIncrease = () => {
+        dispatch(addToCart({ id, title, price, image, restaurant: '' }))
+    }
+
+    const handleDecrease = () => {
+        dispatch(removeFromCart(id))
+    }
+
+    const handleRemove = () => {
+        dispatch(removeItem(id))
+    }
+
     return (
-        <>
+        <View style={style.wrapper}>
             <View style={style.container}>
                 <View style={style.imageContainer}>
-                    <Image />
+                    {image ? (
+                        <Image source={{ uri: image }} style={{ width: '100%', height: '100%', borderRadius: 10 }} resizeMode="cover" />
+                    ) : null}
                 </View>
-                <View style={{ gap: 8 }}>
-                    <Text style={style.titleText}>Pizza  Calzone European</Text>
-                    <Text style={style.priceText}>$64</Text>
-                    <View>
-                    </View>
+                <View style={style.contentContainer}>
+                    <Text style={style.titleText} numberOfLines={1}>{title}</Text>
+                    <Text style={style.priceText}>${itemTotal}</Text>
                     <View style={style.counter}>
-                        <View style={style.minusButton}><Text style={style.btntext}>-</Text></View>
-                        <View><Text style={style.btntext}>1</Text></View>
-                        <View style={style.minusButton}><Text style={style.btntext}>+</Text></View>
+                        <TouchableOpacity style={style.minusButton} onPress={handleDecrease}>
+                            <Text style={style.btntext}>-</Text>
+                        </TouchableOpacity>
+                        <View><Text style={style.btntext}>{quantity}</Text></View>
+                        <TouchableOpacity style={style.minusButton} onPress={handleIncrease}>
+                            <Text style={style.btntext}>+</Text>
+                        </TouchableOpacity>
                     </View>
                 </View>
             </View>
-            <View style={style.crossIcon}>
+            <TouchableOpacity style={style.crossIcon} onPress={handleRemove}>
                 <Entypo name="cross" color="#FFF" size={20} />
-            </View>
-
-        </>
+            </TouchableOpacity>
+        </View>
     )
 }
 
 export default CartCard
 
 const style = StyleSheet.create({
+    wrapper: {
+        position: 'relative',
+    },
     container: {
         height: 170,
         width: "97%",
@@ -42,6 +72,12 @@ const style = StyleSheet.create({
         justifyContent: 'space-around',
         flexDirection: "row",
         marginTop: 20,
+    },
+    contentContainer: {
+        flex: 1,
+        gap: 8,
+        paddingRight: 40,
+        justifyContent: 'center',
     },
     imageContainer: {
         height: 140,
@@ -53,15 +89,16 @@ const style = StyleSheet.create({
     titleText: {
         fontSize: fontsSize.large,
         color: Colors.white,
-        marginRight: 10,
-        width: 200,
+        width: '100%',
         marginTop: 10,
+        marginLeft:15,
         fontFamily: Fonts.senMedium,
 
     },
     priceText: {
         fontSize: fontsSize.smd,
         fontFamily: Fonts.senMedium,
+        marginLeft:15,
         color: Colors.white,
     },
     crossIcon: {

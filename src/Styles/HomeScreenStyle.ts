@@ -30,6 +30,7 @@ export const getStyle = (colors: any) => StyleSheet.create({
     },
     CategoriesTitle: {
         color: colors.semiBlack,
+        marginBottom: Spacing.sm,
         fontFamily: Fonts.senSemiBold,
         fontSize: Font.smd
     },

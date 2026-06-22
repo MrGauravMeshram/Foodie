@@ -1,9 +1,6 @@
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import React from 'react'
 import Animated,{SharedTransition} from 'react-native-reanimated'
-
-const { width } = Dimensions.get('window');
-const cardWidth = width - 32;
 
 const RestaurantCard = ({ image, id }: any) => {
   const transition = SharedTransition.duration(550).springify();
@@ -11,11 +8,11 @@ const RestaurantCard = ({ image, id }: any) => {
     <View style={style.imageBox}>
       <Animated.Image
         source={{ uri: image }}
-        style={{ height: 200, width: cardWidth, borderRadius: 15 }}
+        style={style.image}
         resizeMode='cover'
 
         sharedTransitionTag={`restaurant-image-${id}`}
-          sharedTransitionStyle={transition}
+        sharedTransitionStyle={transition}
       />
     </View>
   )
@@ -24,10 +21,15 @@ const RestaurantCard = ({ image, id }: any) => {
 export default RestaurantCard
 
 const style = StyleSheet.create({
-    imageBox:{
-        height:200,
-        width:"100%",
-        alignSelf:"center",
-        borderRadius:30,
-    }
+  imageBox: {
+    height: 200,
+    width: "100%",
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    overflow: 'hidden',
+  },
+  image: {
+    height: 200,
+    width: "100%",
+  }
 })

@@ -15,6 +15,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@gorhom/bottom-sheet": "^5.2.14",
     "@react-native-community/checkbox": "^0.5.20",
     "@react-native-masked-view/masked-view": "^0.3.2",
     "@react-native-vector-icons/fontawesome6": "^13.1.2",

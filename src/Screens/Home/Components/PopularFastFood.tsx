@@ -11,17 +11,19 @@ const PopularFastFood = ({ data }: any) => {
     </View>
     <View style={style.cardContainer}>
     <FoodCard
-  image={"https://i.pinimg.com/736x/ca/a8/50/caa85028e403ce2914534928e98a8263.jpg"}
-  title="Burger Bistro"
-  restaurant="Rose Garden"
-  price={40}
-/>
- <FoodCard
-  image={"https://i.pinimg.com/736x/ca/a8/50/caa85028e403ce2914534928e98a8263.jpg"}
-  title="Buffalo Pizza"
-  restaurant="Cafenio Coffee Club"
-  price={50}
-/>
+      id="ff1"
+      image={"https://i.pinimg.com/736x/ca/a8/50/caa85028e403ce2914534928e98a8263.jpg"}
+      title="Burger Bistro"
+      restaurant="Rose Garden"
+      price={40}
+    />
+     <FoodCard
+      id="ff2"
+      image={"https://i.pinimg.com/736x/ca/a8/50/caa85028e403ce2914534928e98a8263.jpg"}
+      title="Buffalo Pizza"
+      restaurant="Cafenio Coffee Club"
+      price={50}
+    />
 </View>
     </View>
   )
