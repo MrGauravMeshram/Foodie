@@ -23,7 +23,7 @@ const ResaurantCardDetials = ({ Data }: any) => {
         onPress={() => navigation.navigate('RestaurantDetials', { restaurant: item })}
         style={styles.container}
       >
-        <View>
+        <View >
           <RestaurantCard image={item.image} id={item.id} />
         </View>
         <View>
@@ -58,6 +58,8 @@ const ResaurantCardDetials = ({ Data }: any) => {
       renderItem={renderCard}
       keyExtractor={(item) => item.id}
       scrollEnabled={false}
+      contentContainerStyle={{gap:10}}
+    
     />
   )
 }
@@ -66,7 +68,20 @@ export default ResaurantCardDetials
 
 const getStyles = (colors: any) => StyleSheet.create({
   container: {
-    paddingVertical: Padding.sPadding
+    paddingVertical: Padding.sPadding,
+    borderWidth:0.5,
+    borderRadius:10,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4, // Bottom shadow
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+
+    // Android Shadow
+    elevation: 5,
+  
   },
   title: {
     fontFamily: Fonts.senBold,
