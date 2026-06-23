@@ -13,11 +13,13 @@ import { Fonts, fontsSize } from '../../Theme/fonts'
 import CheckBox from '@react-native-community/checkbox';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { CustomBottomSheet } from '../../Components/CustomBottomSheet';
+import Modal from 'react-native-modal'
 
-const CartScreen = () => {
+const CartScreen = ({navigation}:any) => {
   const { colors, isDarkMode } = useTheme();
   const style = useThemeStyles(getStyle);
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const [isOpen,setisOpen] = useState(false)
   const [checked, setChecked] = useState(false);
 
   const openBottomSheet = useCallback(() => {
@@ -54,6 +56,21 @@ const CartScreen = () => {
     <View style={{ flex: 1, backgroundColor: colors.backgroundColorBlack }}>
       <SafeAreaView style={style.Container}>
         <StatusBar barStyle="light-content" />
+        <Modal
+  isVisible={isOpen}
+  onBackdropPress={() => setisOpen(false)}
+>
+  <View
+    style={{
+      backgroundColor: 'white',
+      padding: 20,
+      borderRadius: 12,
+      minHeight: 300,
+    }}
+  >
+    <Text style={{ color: 'black' }}>Breakout</Text>
+  </View>
+</Modal>
         <View>
           <SearchHeader
             color={true}
@@ -131,13 +148,15 @@ const CartScreen = () => {
                 <Text style={style.totalLabel}>Total</Text>
                 <Text style={style.totalValue}>${total.toFixed(2)}</Text>
               </View>
-              <View style={{ flexDirection: "row" }}>
+              <View >
+                <TouchableOpacity style={{ flexDirection: "row" }} onPress={()=>setisOpen(true)}>
                 <Text style={{ fontSize: fontsSize.smd, color: colors.black, fontFamily: Fonts.senRegular, color: colors.btnColor }}>BreakDown</Text>
                 <MaterialIcons name="arrow-forward-ios" color="#000" size={24} />
+                </TouchableOpacity>
               </View>
             </View>
 
-            <TouchableOpacity style={style.checkoutButton} activeOpacity={0.8}>
+            <TouchableOpacity style={style.checkoutButton} activeOpacity={0.8} onPress={()=>navigation.navigate("Payment")}>
               <Text style={style.checkoutButtonText}>Place Order</Text>
             </TouchableOpacity>
           </View>

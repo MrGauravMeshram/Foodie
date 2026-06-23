@@ -18,6 +18,7 @@ import PopularItemScreen from "../Screens/Home/PopularItemScreen";
 import CartScreen from "../Screens/Cart/CartScreen";
 import BottomNavigation from "./BottomNavigation";
 import Practice from "../Screens/Practice/Practice";
+import PaymentScreen from "../Screens/PaymentGateWay/PaymentScreen";
 import React from 'react'
 
 
@@ -73,6 +74,7 @@ const StackNavigation = () => {
                 <Stack.Screen name="RestaurantDetials" component={RestaurantDetials} options={{ headerShown: false, animation: 'fade', }} />
                 <Stack.Screen name= "CartScreen" component={CartScreen} options={{headerShown:false}}/>
                 <Stack.Screen name= "Practice" component={Practice} options={{headerShown:false}}/>
+                <Stack.Screen name = "Payment" component={PaymentScreen} options={{headerShown:false}}/>
             </Stack.Navigator>
         </NavigationContainer>
     )
