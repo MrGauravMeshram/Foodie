@@ -26,9 +26,6 @@ const SearchHeader = ({
 
   const hasData = data && data.length > 0;
 
-  // If a fixed dark background header is requested, determine correct backgrounds/foregrounds.
-  // E.g., for CartScreen, light mode shows a dark header (color=true).
-  // In dark mode, all headers should match the dark background.
   const isHeaderDark = color || isDarkMode;
   const headerBgColor = isHeaderDark ? colors.backgroundColorBlack : colors.backgroundColor;
   const textTitleColor = isHeaderDark ? colors.white : colors.semiBlack;

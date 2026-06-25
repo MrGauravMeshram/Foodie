@@ -19,6 +19,9 @@ import CartScreen from "../Screens/Cart/CartScreen";
 import BottomNavigation from "./BottomNavigation";
 import Practice from "../Screens/Practice/Practice";
 import PaymentScreen from "../Screens/PaymentGateWay/PaymentScreen";
+import AddCardScreen from "../Screens/PaymentGateWay/AddCardScreen";
+import MapScreen from '../Screens/Map/Map'
+import PaymentDoneScreen from "../Screens/PaymentGateWay/PaymentDoneScreen";
 import React from 'react'
 
 
@@ -72,9 +75,12 @@ const StackNavigation = () => {
                 <Stack.Screen name="SearchScreen" component={SearchScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="PopularItem" component={PopularItemScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="RestaurantDetials" component={RestaurantDetials} options={{ headerShown: false, animation: 'fade', }} />
-                <Stack.Screen name= "CartScreen" component={CartScreen} options={{headerShown:false}}/>
-                <Stack.Screen name= "Practice" component={Practice} options={{headerShown:false}}/>
-                <Stack.Screen name = "Payment" component={PaymentScreen} options={{headerShown:false}}/>
+                <Stack.Screen name="CartScreen" component={CartScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="Practice" component={Practice} options={{ headerShown: false }} />
+                <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="AddCard" component={AddCardScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="PaymentDone" component={PaymentDoneScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     )
