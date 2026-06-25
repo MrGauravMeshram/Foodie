@@ -17,7 +17,7 @@ export const FoodCardData = [
   },
   {
     id: '3',
-    title: 'Panee',
+    title: 'Paneer Pizza',
     image:
       'https://i.pinimg.com/736x/d6/c9/1d/d6c91d4f1dd63c1eb23d98b8736c31ed.jpg',
     price: '$80',

@@ -10,6 +10,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { useTabBar } from '../Utils/TabBarContext';
 import { useTheme } from '../Hooks/useTheme';
 import { useThemeStyles } from '../Hooks/useThemeStyles';
+import DrawerNavigation from './DrawerNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -34,8 +35,8 @@ const CustomTabBar = ({ state, descriptors, navigation }: any) => {
                     options.tabBarLabel !== undefined
                         ? options.tabBarLabel
                         : options.title !== undefined
-                        ? options.title
-                        : route.name;
+                            ? options.title
+                            : route.name;
 
                 const isFocused = state.index === index;
 
@@ -108,7 +109,7 @@ const BottomNavigation = () => {
                 },
             }}
         >
-            <Tab.Screen name="Home" component={HomeScreen} options={{
+            <Tab.Screen name="Home" component={DrawerNavigation} options={{
                 tabBarIcon: ({ color }) => (
                     <Ionicons name="home-outline" color={color} size={22} />
                 ),

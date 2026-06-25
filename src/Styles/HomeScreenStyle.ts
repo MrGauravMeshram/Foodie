@@ -38,5 +38,10 @@ export const getStyle = (colors: any) => StyleSheet.create({
         color: colors.gray,
         fontFamily: Fonts.senMedium,
         fontSize: Font.md,
-    }
+    },
+    contentContainer: {
+    flex: 1,
+    padding: 36,
+    alignItems: 'center',
+  },
 })

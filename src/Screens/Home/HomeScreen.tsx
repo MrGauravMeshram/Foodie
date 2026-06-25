@@ -1,5 +1,5 @@
 import { View, Text, Animated, LayoutChangeEvent } from 'react-native'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef,useCallback,useMemo } from 'react'
 import { getStyle } from '../../Styles/HomeScreenStyle'
 import SearchBar from '../../Components/SearchBar'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -19,12 +19,16 @@ import { Easing, withTiming, withSpring } from 'react-native-reanimated';
 import { useTabBar } from '../../Utils/TabBarContext';
 import { useTheme } from '../../Hooks/useTheme';
 import { useThemeStyles } from '../../Hooks/useThemeStyles';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 const HomeScreen = ({ route }: any) => {
   const [showModal, setShowModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('1');
   const navigation = useNavigation<any>();
-  const { city, state, address } = route.params || {};
+
+  const resolvedParams = route?.params?.params ?? route?.params ?? {};
+  const { city, state, address, area } = resolvedParams;
+  const locationLabel = [address, area, city, state].filter(Boolean).join(', ') || 'Select Location';
 
   const { colors, isDarkMode } = useTheme();
   const Style = useThemeStyles(getStyle);
@@ -38,7 +42,7 @@ const HomeScreen = ({ route }: any) => {
   const tabBarState = useRef(0);
   const layoutHeight = useRef(0);
   const contentHeight = useRef(0);
-
+const bottomsheetRef = useRef<BottomSheet>(null)
   const [searchBarY, setSearchBarY] = useState(0);
   const [searchBarHeight, setSearchBarHeight] = useState(0);
   const [pillY, setPillY] = useState(0);
@@ -53,7 +57,7 @@ const HomeScreen = ({ route }: any) => {
     const { y } = event.nativeEvent.layout;
     setPillY(y);
   };
-
+   const snapPoint = useMemo(()=>['25%',"50%","75%"],[]);
   const springConfig = useRef({
     damping: 18,
     stiffness: 90,
@@ -117,6 +121,10 @@ const HomeScreen = ({ route }: any) => {
     };
   }, [searchBarY, topInset]);
 
+    const handleSheetChanges = useCallback((index: number) => {
+    console.log('handleSheetChanges', index);
+  }, []);
+
   const searchBarLimit = searchBarY - topInset;
   const searchBarTranslateY = (searchBarY > 0 && searchBarLimit > 0)
     ? scrollY.interpolate({
@@ -134,6 +142,9 @@ const HomeScreen = ({ route }: any) => {
       extrapolateLeft: 'clamp',
     })
     : 0;
+    const openBottomSheet = () => {
+  bottomsheetRef.current?.snapToIndex(1); 
+};
 
   return (
     <View style={{ flex: 1, backgroundColor: colors.backgroundColor }}>
@@ -177,7 +188,7 @@ const HomeScreen = ({ route }: any) => {
         }}
       >
         <View>
-          <HomeScreenHeader address={address} />
+          <HomeScreenHeader address={locationLabel} />
           <CouponModal
             isVisible={showModal}
             onClose={() => setShowModal(false)}
@@ -206,10 +217,10 @@ const HomeScreen = ({ route }: any) => {
 
         <View style={Style.Categories}>
           <Text style={Style.CategoriesTitle}>All Categories</Text>
-          <View style={Style.SeeAll}>
+          <TouchableOpacity style={Style.SeeAll} onPress={openBottomSheet}>
             <Text style={Style.CategoriesSubtitle}>See All</Text>
             <MaterialIcons name="keyboard-arrow-right" color={colors.lightGrey} size={26} />
-          </View>
+          </TouchableOpacity>
         </View>
 
         <Animated.View
@@ -246,6 +257,17 @@ const HomeScreen = ({ route }: any) => {
           <ResaurantCardDetials Data={RestaurantData} />
         </View>
       </Animated.ScrollView>
+      <BottomSheet
+        ref={bottomsheetRef}
+         index={-1} // Initially closed
+  snapPoints={snapPoint}
+  enablePanDownToClose
+        onChange={handleSheetChanges}
+      >
+        <BottomSheetView style={Style.contentContainer}>
+          <Text>Awesome 🎉</Text>
+        </BottomSheetView>
+      </BottomSheet>
     </View>
   )
 }

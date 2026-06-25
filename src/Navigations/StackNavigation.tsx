@@ -20,7 +20,7 @@ import BottomNavigation from "./BottomNavigation";
 import Practice from "../Screens/Practice/Practice";
 import PaymentScreen from "../Screens/PaymentGateWay/PaymentScreen";
 import AddCardScreen from "../Screens/PaymentGateWay/AddCardScreen";
-import MapScreen from '../Screens/Map/Map'
+
 import PaymentDoneScreen from "../Screens/PaymentGateWay/PaymentDoneScreen";
 import React from 'react'
 
@@ -80,7 +80,7 @@ const StackNavigation = () => {
                 <Stack.Screen name="Payment" component={PaymentScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="AddCard" component={AddCardScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="PaymentDone" component={PaymentDoneScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="MapScreen" component={MapScreen} options={{ headerShown: false }} />
+             
             </Stack.Navigator>
         </NavigationContainer>
     )

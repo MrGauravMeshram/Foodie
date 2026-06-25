@@ -61,11 +61,12 @@ const getStyles = (colors: any) => StyleSheet.create({
     subtitle: {
         flexDirection: "row",
         justifyContent: "space-between",
-        gap: 15
+        gap: 10,
+    
     },
     titleText: {
         textAlign: "left",
-        marginRight: 55,
+       
         overflow: "hidden",
         fontFamily: Fonts.senSemiBold,
         fontSize: fontsSize.md,

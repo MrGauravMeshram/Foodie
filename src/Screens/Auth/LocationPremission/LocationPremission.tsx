@@ -57,7 +57,7 @@ const data = JSON.parse(text);
   const city = data.address?.city;
   const state = data.address?.state;
 
-  const address = data.display_name;
+  const address = data.display_name || [area, city, state].filter(Boolean).join(', ') || `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
 
   console.log('Area:', area);
   console.log('City:', city);
@@ -77,6 +77,18 @@ const data = JSON.parse(text);
 
 } catch (error) {
   console.log('Reverse Geocoding Error:', error);
+  const fallbackAddress = `${latitude.toFixed(4)}, ${longitude.toFixed(4)}`;
+  navigation.navigate('BottomNavigation', {
+    screen: 'Home',
+    params: {
+      area: '',
+      city: '',
+      state: '',
+      address: fallbackAddress,
+      latitude,
+      longitude,
+    },
+  });
 }
       },
       error => {
