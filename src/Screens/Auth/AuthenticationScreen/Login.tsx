@@ -1,12 +1,12 @@
 import { View, Text, Image, StatusBar, TouchableOpacity } from 'react-native'
 import { getStyles } from '../../../Styles/AuthStyle'
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import InputField from '../../../Components/InputField'
 import { Button } from '../../../Components/Button'
 import Social from '../OnBoardingScreen/Component/social'
 import { useTheme } from '../../../Hooks/useTheme'
 import { useThemeStyles } from '../../../Hooks/useThemeStyles'
-
+import { requestLocationPermission } from '../../../Utils/LocationRequest'
 const Login = ({ navigation }: any) => {
     const [email, setEmail] = useState("");
     const [checked, setChecked] = useState(false);
@@ -19,6 +19,18 @@ const Login = ({ navigation }: any) => {
         { icon: "twitter", backgroundColor: "#169CE8" },
         { icon: "apple", backgroundColor: colors.black }
     ]
+
+    const handleLogin = async () => {
+        const hasPermission = await requestLocationPermission();
+
+        if (!hasPermission) {
+            navigation.navigate("LocationPremission");
+        }else{
+            navigation.navigate("BottomNavigation");
+        }
+          requestLocationPermission();
+
+    }
     return (
         <View style={Styles.container}>
             <StatusBar
@@ -74,7 +86,7 @@ const Login = ({ navigation }: any) => {
                     </View>
                 </View>
                 <View style={{ marginTop: 30 }}>
-                    <Button title="Log In" onPress={() => {navigation.navigate("LocationPremission")}} />
+                    <Button title="Log In" onPress={handleLogin} />
                 </View>
                 <View style={Styles.bottomSec}>
                     <Text style={Styles.bottomtitle}>Don't have an account?</Text>

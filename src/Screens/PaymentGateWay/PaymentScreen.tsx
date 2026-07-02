@@ -19,7 +19,6 @@ const PaymentScreen = ({ navigation }: any) => {
   const [savedCards, setSavedCards] = useState<any[]>([]);
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null);
 
-  // Load saved card details on focus
   useFocusEffect(
     React.useCallback(() => {
       const loadSavedCards = async () => {
@@ -29,7 +28,7 @@ const PaymentScreen = ({ navigation }: any) => {
           if (cardsJson) {
             cards = JSON.parse(cardsJson);
           } else {
-            // Check legacy single card
+      
             const singleCardJson = await AsyncStorage.getItem('saved_card');
             if (singleCardJson) {
               const legacyCard = {

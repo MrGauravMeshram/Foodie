@@ -14,7 +14,7 @@ import { setSelectedCategory } from '../../State/PopularSlice'
 import { CategoriesData } from '../../Data/CategoriesData'
 import { useTheme } from '../../Hooks/useTheme';
 import { useThemeStyles } from '../../Hooks/useThemeStyles';
-
+import FilterModel from '../../Components/FilterModel'
 const PopularItemScreen = () => {
   const dispatch = useDispatch();
   const selectedCategory = useSelector((state: RootState) => state.popular.selectedCategory);
@@ -22,10 +22,10 @@ const PopularItemScreen = () => {
   const style = useThemeStyles(getStyle);
 
   const categories = CategoriesData;
-
+const [openFilterModel, setOpenFilterModel] = React.useState(false);
   return (
     <SafeAreaView style={style.container}>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView showsVerticalScrollIndicator={true}>
       <SearchHeader
         icon="search"
         title="Burger"
@@ -33,7 +33,7 @@ const PopularItemScreen = () => {
         selectedValue={selectedCategory}
         onSelect={(item: any) => dispatch(setSelectedCategory(item.title))}
         showFilter={true}
-        onFilterPress={() => console.log('Filter pressed')}
+       onFilterPress={() => setOpenFilterModel(true)}
       />
 
       <Text style={style.popularText}>Popular {selectedCategory}</Text>
@@ -62,6 +62,9 @@ const PopularItemScreen = () => {
       </View>
       <View>
          <ResaurantCardDetials Data = {RestaurantData}/>
+      </View>
+      <View>
+        <FilterModel openModel={openFilterModel}   onClose={() => setOpenFilterModel(false)} />
       </View>
       </ScrollView>
     </SafeAreaView>

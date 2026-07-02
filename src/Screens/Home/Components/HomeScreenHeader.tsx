@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity } from 'react-native'
-import React, { useRef } from 'react'
+import React, { useRef,useEffect,useState } from 'react'
 import Foundation from 'react-native-vector-icons/Foundation';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Feather from 'react-native-vector-icons/Feather';
@@ -10,8 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from '../../../Hooks/useTheme';
 import { useThemeStyles } from '../../../Hooks/useThemeStyles';
 import switchTheme from 'react-native-theme-switch-animation';
-
-
+import {getCurrentLocation} from '../../../Utils/CurrentLocation'
 
 
 
@@ -19,8 +18,23 @@ const HomeScreenHeader = ({ address, openDrawer, }: any) => {
   const buttonRef = useRef<any>(null);
   const navigation = useNavigation<any>()
   const { isDarkMode, toggleTheme, colors } = useTheme();
+  
   const styles = useThemeStyles(getStyles);
+const [currentLocation, setCurrentLocation] = useState("Getting location...");
 
+  useEffect(() => {
+    const fetchLocation = async () => {
+      const location = await getCurrentLocation();
+
+      if (location) {
+        setCurrentLocation(location);
+      } else {
+        setCurrentLocation("Location unavailable");
+      }
+    };
+
+    fetchLocation();
+  }, []);
   const handleThemeToggle = () => {
     if (buttonRef.current) {
       buttonRef.current.measure((_x: number, _y: number, width: number, height: number, px: number, py: number) => {
@@ -52,7 +66,7 @@ const HomeScreenHeader = ({ address, openDrawer, }: any) => {
         </View>
         <View style={{ flex: 1 }}>
           <Text style={styles.Deliverytitle}>DELIVERY TO</Text>
-          <Text style={styles.locationSubtile} numberOfLines={1} ellipsizeMode="tail">{address || 'Select Location'}</Text>
+          <Text style={styles.locationSubtile} numberOfLines={1} ellipsizeMode="tail">{currentLocation}</Text>
         </View>
       </View>
       <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>

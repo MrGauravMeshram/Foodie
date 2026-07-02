@@ -259,7 +259,7 @@ const bottomsheetRef = useRef<BottomSheet>(null)
       </Animated.ScrollView>
       <BottomSheet
         ref={bottomsheetRef}
-         index={-1} // Initially closed
+         index={-1} 
   snapPoints={snapPoint}
   enablePanDownToClose
         onChange={handleSheetChanges}

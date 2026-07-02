@@ -13,15 +13,15 @@ function CustomDrawerContent(props: any) {
     return (
         <DrawerContentScrollView {...props}>
 
-            <DrawerItem
-                label="Home"
-                onPress={() => { props.navigation.navigate("Home") }}
-            />
-            <DrawerItem
-                label="Profile"
-                onPress={() => { props.navigation.navigate("Profile") }}
-            />
-        </DrawerContentScrollView>
+                <DrawerItem
+                    label="Home"
+                    onPress={() => { props.navigation.navigate("Home") }}
+                />
+                <DrawerItem
+                    label="Profile"
+                    onPress={() => { props.navigation.navigate("Profile") }}
+                />
+            </DrawerContentScrollView>
     );
 }
 

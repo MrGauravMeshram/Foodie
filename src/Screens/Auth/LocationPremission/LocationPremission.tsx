@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image, Alert, Linking} from 'react-native';
+import {View, Text, StyleSheet, Image, Alert, Linking,StatusBar} from 'react-native';
 import {Button} from '../../../Components/Button';
 import React from 'react';
 import {Spacing} from '../../../Theme/Spacing';
@@ -7,6 +7,7 @@ import Geolocation from 'react-native-geolocation-service';
 import {useTheme} from '../../../Hooks/useTheme';
 import {useThemeStyles} from '../../../Hooks/useThemeStyles';
 import {requestLocationPermission} from '../../../Utils/LocationRequest';
+
 
 const LocationPremission = ({navigation}: any) => {
   const { colors } = useTheme();
@@ -105,6 +106,7 @@ const data = JSON.parse(text);
 
   return (
     <View style={style.Container}>
+      <StatusBar barStyle="dark-content"/>
       <View style={style.imageContainer}>
         <Image
           source={require('../../../Assets/Images/3d-view-map.jpg')}

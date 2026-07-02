@@ -14,7 +14,7 @@ const SearchHeader = ({
   selectedValue,
   onSelect,
   showFilter = false,
-  onFilterPress,
+  onFilterPress = () => void  0,
   color,
   rightText,
   onRightPress,
@@ -113,7 +113,7 @@ const SearchHeader = ({
           <TouchableOpacity
             style={styles.filterButton}
             activeOpacity={0.8}
-            onPress={onFilterPress}
+         onPress={() => onFilterPress(true)}
           >
             <Feather name="sliders" color={colors.semiBlack} size={20} />
           </TouchableOpacity>

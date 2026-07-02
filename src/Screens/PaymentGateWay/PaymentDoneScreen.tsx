@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../../Hooks/useTheme';
 import { useThemeStyles } from '../../Hooks/useThemeStyles';
 import { Fonts } from '../../Theme/fonts';
-import MapView from 'react-native-maps';
+
 
 
 
@@ -45,7 +45,7 @@ const PaymentDoneScreen = ({ navigation }: any) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('BottomNavigation')}
+          onPress={() => navigation.navigate('Map')}
           activeOpacity={0.8}
         >
           <Text style={styles.buttonText}>TRACK ORDER</Text>
