@@ -2,10 +2,10 @@ import { View, Text ,StyleSheet} from 'react-native'
 import { Colors } from '../Theme/Color'
 import React from 'react'
 
-const pillButton = ({ title }: { title: string }) => {
+const pillButton = ({ title, active }: { title: string; active: boolean }) => {
   return (
-    <View style={Style.container}>
-     <Text style={Style.text}>{title}</Text>
+    <View style={[Style.container, active && Style.activeContainer]}>
+     <Text style={[Style.text,active && Style.activeText]}>{title}</Text>
     </View>
   )
 }
@@ -27,5 +27,12 @@ const Style  = StyleSheet.create({
         fontSize:18,
         color:Colors.btnColor,
         fontFamily:"Sen-Regular"
+    },
+    activeContainer:{
+        backgroundColor:Colors.btnColor,
+        borderColor:Colors.btnColor,
+    },
+    activeText:{
+        color:"#FFF",
     }
 })

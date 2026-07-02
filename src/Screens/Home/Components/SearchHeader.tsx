@@ -17,6 +17,7 @@ const SearchHeader = ({
   onFilterPress = () => void  0,
   color,
   rightText,
+  onPress,
   onRightPress,
 }: any) => {
   const navigation = useNavigation();
@@ -104,7 +105,7 @@ const SearchHeader = ({
 
       <View style={styles.rightSection}>
         {icon && (
-          <TouchableOpacity style={styles.cartContainer} activeOpacity={0.8}>
+          <TouchableOpacity style={styles.cartContainer} activeOpacity={0.8} onPress={onPress}>
             <Feather name={icon} color={colors.whiteIcon} size={22} />
           </TouchableOpacity>
         )}

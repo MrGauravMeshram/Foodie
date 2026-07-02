@@ -128,7 +128,7 @@ const AddCardScreen = ({ navigation }: any) => {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* Header */}
+
           <View style={styles.header}>
             <TouchableOpacity
               style={styles.closeButton}

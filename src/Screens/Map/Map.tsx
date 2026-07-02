@@ -9,7 +9,7 @@ import { requestLocationPermission } from '../../Utils/LocationRequest'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { Fonts } from '../../Theme/fonts'
-const Map = () => {
+const Map = ({ navigation }: { navigation: any }) => {
   const [location, setlocation] = useState({ longitude: 0, latitude: 0 });
   const [loading, setLoading] = useState(true);
   const cameraRef = useRef<CameraRef>(null);
@@ -80,7 +80,7 @@ const Map = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={Style.headerBlock}>
-        <SearchHeader title={"Track Order"} />
+        <SearchHeader title={"Track Order"} icon="message-square" onPress={() => navigation.navigate('Chat')} />
       </View>
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <Maps
