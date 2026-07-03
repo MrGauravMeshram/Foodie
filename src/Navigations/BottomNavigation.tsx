@@ -114,9 +114,9 @@ const BottomNavigation = () => {
                     <Ionicons name="home-outline" color={color} size={22} />
                 ),
             }} />
-            <Tab.Screen name="Offer" component={OfferScreen} options={{
+            <Tab.Screen name="Order" component={OfferScreen} options={{
                 tabBarIcon: ({ color }) => (
-                    <Ionicons name="ticket-outline" color={color} size={22} />
+                    <Ionicons name="document-text-outline" color={color} size={22} />
                 ),
             }} />
             <Tab.Screen name="Profile" component={ProfileScreen} options={{

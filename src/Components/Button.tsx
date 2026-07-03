@@ -14,14 +14,16 @@ interface ButtonProps {
     onPress: () => void;
     style?: StyleProp<ViewStyle>;
     textStyle?: StyleProp<TextStyle>;
+    disabled?: boolean;
 }
 
-export const Button = ({ title, onPress, style, textStyle }: ButtonProps) => {
+export const Button = ({ title, onPress, style, textStyle, disabled }: ButtonProps) => {
     return (
         <TouchableOpacity
-            style={[styles.button, style]}
+            style={[styles.button, style, disabled && { opacity: 0.5 }]}
             onPress={onPress}
-            activeOpacity={0.8}
+            activeOpacity={disabled ? 1 : 0.8}
+            disabled={disabled}
         >
             <Text style={[styles.text, textStyle]}>{title}</Text>
         </TouchableOpacity>

@@ -15,7 +15,7 @@ function CustomDrawerContent(props: any) {
 
                 <DrawerItem
                     label="Home"
-                    onPress={() => { props.navigation.navigate("Home") }}
+                    onPress={() => { props.navigation.navigate("HomeScreen") }}
                 />
                 <DrawerItem
                     label="Profile"
@@ -39,7 +39,7 @@ const DrawerNavigation = () => {
                 drawerStyle: { width: '70%' },
             }}
         >
-            <Drawer.Screen name="Home" component={HomeScreen} />
+            <Drawer.Screen name="HomeScreen" component={HomeScreen} />
             <Drawer.Screen name="Profile" component={ProfileScreen} />
         </Drawer.Navigator>
     )
